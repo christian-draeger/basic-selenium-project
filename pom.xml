@@ -13,7 +13,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>3.0.0-beta2</version>
+            <version>3.0.0</version>
         </dependency>
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
@@ -96,19 +96,13 @@
             </properties>
         </profile>
         <profile>
-            <id>jbrowser</id>
-            <properties>
-                <browser.name>jbrowser</browser.name>
-            </properties>
-        </profile>
-        <profile>
-            <id>edge(windows only)</id>
+            <id>edge</id>
             <properties>
                 <browser.name>edge</browser.name>
             </properties>
         </profile>
         <profile>
-            <id>internet explorer(windows only)</id>
+            <id>internetExplorer</id>
             <properties>
                 <browser.name>internetexplorer</browser.name>
             </properties>
