@@ -8,6 +8,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.MarionetteDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class WebDriverBuilder {
@@ -36,6 +37,8 @@ public class WebDriverBuilder {
                 return new InternetExplorerDriver(capabilities);
             case "opera":
                 return new OperaDriver(capabilities);
+            case "phantomjs":
+                return new PhantomJSDriver(capabilities);
             default:
                 return new MarionetteDriver(capabilities);
         }

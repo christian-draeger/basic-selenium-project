@@ -11,6 +11,6 @@ public class StartPage extends Pages {
 	}
 
 	public void open(){
-		open();
+		super.open();
 	}
 }
