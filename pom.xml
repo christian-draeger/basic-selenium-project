@@ -113,11 +113,5 @@
                 <browser.name>opera</browser.name>
             </properties>
         </profile>
-        <profile>
-            <id>marionette</id>
-            <properties>
-                <browser.name>marionette</browser.name>
-            </properties>
-        </profile>
     </profiles>
 </project>

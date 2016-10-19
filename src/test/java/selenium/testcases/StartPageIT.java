@@ -1,21 +1,24 @@
 package selenium.testcases;
 
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static selenium.pageobjects.StartPage.Navi.PERSONAL;
+
 import org.junit.Test;
 import org.openqa.selenium.support.PageFactory;
 
 import selenium.SeleniumTestWrapper;
 import selenium.pageobjects.StartPage;
-import utils.TestUtils;
 
 public class StartPageIT extends SeleniumTestWrapper {
 
 	StartPage startPage = PageFactory.initElements(getDriver(), StartPage.class);
 
 	@Test
-	public void startPageTest() {
+	public void checkPageTest() {
 		startPage.open();
-		TestUtils.sleep(3000);
+		startPage.clickNavigation(PERSONAL);
+		assertThat(getDriver().getCurrentUrl(), containsString("personal"));
 	}
-
 }

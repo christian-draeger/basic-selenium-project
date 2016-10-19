@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
@@ -67,7 +66,6 @@ public class GalenIT extends SeleniumTestWrapper {
 		failIfErrors(layoutReport);
 	}
 
-	@Ignore
 	@Test
 	public void checkStartPage() throws Throwable {
 		checkSpecFile("StartPage");

@@ -1,11 +1,11 @@
 @objects
 
-    logo						#headerlogo
-    searchArea                  .searchArea
+    header						.header
+    mainArea                  	div[role="main"]
 
 = StartPage =
 
     @on small,medium,large,xlarge,xxlarge
 
-        logo:
-            above searchArea
+        header:
+            above mainArea

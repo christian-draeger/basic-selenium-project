@@ -1,10 +1,6 @@
 package selenium;
 
-import java.util.Set;
-
-import org.junit.After;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 
 import selenium.driver.WebDriverConfig;
 import selenium.utils.WebDriverProvider;
@@ -20,16 +16,16 @@ public abstract class SeleniumTestWrapper {
 		return this.webDriverProvider.getDriver();
 	}
 
-	@After
-	public void tearDown() {
-		Set<String> windowList = getDriver().getWindowHandles();
-
-		if (!windowList.isEmpty() && windowList.size() > 1) {
-			for (String window : windowList) {
-				getDriver().switchTo().window(window).close();
-			}
-		} else {
-			getDriver().close();
-		}
-	}
+//	@After
+//	public void tearDown() {
+//		Set<String> windowList = getDriver().getWindowHandles();
+//
+//		if (!windowList.isEmpty() && windowList.size() > 1) {
+//			for (String window : windowList) {
+//				getDriver().switchTo().window(window).close();
+//			}
+//		} else {
+//			getDriver().close();
+//		}
+//	}
 }
