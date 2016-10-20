@@ -1,11 +1,12 @@
 @objects
 
-    header						.header
+    header						header
     mainArea                  	div[role="main"]
+    footer						.site-footer-container
 
 = StartPage =
 
     @on small,medium,large,xlarge,xxlarge
 
         header:
-            above mainArea
+            above footer

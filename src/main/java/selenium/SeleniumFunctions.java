@@ -25,9 +25,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import utils.TestUtils;
 
-/**
- * Contains functions especially for {@link WebDriver}.
- */
 public abstract class SeleniumFunctions {
 
 	protected WebDriver driver;

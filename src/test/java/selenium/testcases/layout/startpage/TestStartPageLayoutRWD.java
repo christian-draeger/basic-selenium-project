@@ -7,7 +7,6 @@ import org.openqa.selenium.support.PageFactory;
 import selenium.LayoutTestSetup;
 import selenium.pageobjects.StartPage;
 
-// @Category(Layout.class)
 public class TestStartPageLayoutRWD extends LayoutTestSetup {
 
     private StartPage startPage;

@@ -30,7 +30,7 @@ class DesiredCapabilitiesFactory {
 			case "internetexplorer":
 				InternetExplorerDriverManager.getInstance().setup();
 				break;
-			case "marionette":
+			case "firefox":
 				MarionetteDriverManager.getInstance().setup();
 				break;
 			case "opera":

@@ -1,4 +1,4 @@
-package selenium.testcases;
+package selenium.testcases.startpage;
 
 
 import static org.hamcrest.MatcherAssert.assertThat;

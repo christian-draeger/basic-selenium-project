@@ -4,6 +4,7 @@ import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 import org.openqa.selenium.WebDriver;
 
+import selenium.driver.UserAgents;
 import selenium.driver.WebDriverBuilder;
 import selenium.driver.WebDriverConfig;
 
@@ -15,11 +16,19 @@ public class WebDriverProvider extends TestWatcher {
         this.webDriverBuilder = new WebDriverBuilder(webDriverConfig);
     }
 
+    public void useUserAgent(UserAgents userAgent) {
+        webDriverBuilder.userAgent(userAgent);
+    }
+
     public WebDriver getDriver() {
-        if (this.driver == null) {
-            this.driver = this.webDriverBuilder.toWebDriver();
+        if (driver == null) {
+            driver = webDriverBuilder.toWebDriver();
         }
-        return this.driver;
+        return driver;
+    }
+
+    public boolean existsDriver() {
+        return driver != null;
     }
 
     @Override

@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import selenium.Pages;
+import utils.TestUtils;
 
 public class StartPage extends Pages {
 
@@ -45,6 +46,7 @@ public class StartPage extends Pages {
 		for (WebElement navi : navis) {
 			if (navi.getText().equalsIgnoreCase(someNavbarElement.getValue())){
 				navi.click();
+				TestUtils.sleep(500);
 			}
 			break;
 		}
