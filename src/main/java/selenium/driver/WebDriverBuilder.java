@@ -1,7 +1,6 @@
 package selenium.driver;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
-import static selenium.driver.DesiredCapabilitiesFactory.initDesiredCapabilities;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,18 +11,20 @@ import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import io.github.bonigarcia.wdm.ChromeDriverManager;
+import io.github.bonigarcia.wdm.EdgeDriverManager;
+import io.github.bonigarcia.wdm.InternetExplorerDriverManager;
+import io.github.bonigarcia.wdm.MarionetteDriverManager;
+import io.github.bonigarcia.wdm.OperaDriverManager;
+import io.github.bonigarcia.wdm.PhantomJsDriverManager;
+
 public class WebDriverBuilder {
 
     private String name;
-    private String userAgent;
     private final WebDriverConfig webDriverConfig;
 
     public WebDriverBuilder(WebDriverConfig webDriverConfig) {
         this.webDriverConfig = webDriverConfig;
-    }
-
-    public void userAgent(final UserAgents userAgent) {
-        this.userAgent = userAgent.getValue();
     }
 
     public void setName(String name) {
@@ -31,33 +32,40 @@ public class WebDriverBuilder {
     }
 
     public WebDriver toWebDriver() {
-        DesiredCapabilities capabilities = initDesiredCapabilities(webDriverConfig);
+        DesiredCapabilitiesFactory desiredCapabilitiesFactory = new DesiredCapabilitiesFactory();
+        DesiredCapabilities capabilities = desiredCapabilitiesFactory.initDesiredCapabilities(webDriverConfig);
         String browser = webDriverConfig.getBrowserName();
 
         switch (browser) {
             case "chrome":
-                final ChromeDriver chromeDriver = new ChromeDriver();
+                ChromeDriverManager.getInstance().setup();
+                final ChromeDriver chromeDriver = new ChromeDriver(capabilities);
                 chromeDriver.manage().window().maximize();
                 return chromeDriver;
             case "edge":
-                final EdgeDriver edgeDriver = new EdgeDriver();
+                EdgeDriverManager.getInstance().setup();
+                final EdgeDriver edgeDriver = new EdgeDriver(capabilities);
                 edgeDriver.manage().window().maximize();
                 return edgeDriver;
             case "internetexplorer":
-                final InternetExplorerDriver internetExplorerDriver = new InternetExplorerDriver();
+                InternetExplorerDriverManager.getInstance().setup();
+                final InternetExplorerDriver internetExplorerDriver = new InternetExplorerDriver(capabilities);
                 internetExplorerDriver.manage().window().maximize();
                 return internetExplorerDriver;
             case "opera":
-                final OperaDriver operaDriver = new OperaDriver();
+                OperaDriverManager.getInstance().setup();
+                final OperaDriver operaDriver = new OperaDriver(capabilities);
                 operaDriver.manage().window().maximize();
                 return operaDriver;
             case "phantomjs":
+                PhantomJsDriverManager.getInstance().setup();
                 final PhantomJSDriver phantomJsWebDriver = new PhantomJSDriver(capabilities);
                 phantomJsWebDriver.manage().timeouts().implicitlyWait(webDriverConfig.getImplicitlyWait(), SECONDS);
                 phantomJsWebDriver.manage().timeouts().setScriptTimeout(webDriverConfig.getDomMaxScriptRunTime(), SECONDS);
                 phantomJsWebDriver.manage().window().maximize();
                 return phantomJsWebDriver;
             default:
+                MarionetteDriverManager.getInstance().setup();
                 return new MarionetteDriver(capabilities);
         }
     }
