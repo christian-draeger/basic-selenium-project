@@ -5,7 +5,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.MarionetteDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
@@ -22,6 +22,8 @@ public class WebDriverBuilder {
 
     private String name;
     private final WebDriverConfig webDriverConfig;
+    private String userAgent;
+    private boolean disableCookies;
 
     public WebDriverBuilder(WebDriverConfig webDriverConfig) {
         this.webDriverConfig = webDriverConfig;
@@ -31,9 +33,18 @@ public class WebDriverBuilder {
         this.name = name;
     }
 
+    public void userAgent(final UserAgents userAgent) {
+        this.userAgent = userAgent.getValue();
+    }
+
+    public void disableCookies(boolean cookies) {
+        this.disableCookies = cookies;
+    }
+
+
     public WebDriver toWebDriver() {
         DesiredCapabilitiesFactory desiredCapabilitiesFactory = new DesiredCapabilitiesFactory();
-        DesiredCapabilities capabilities = desiredCapabilitiesFactory.initDesiredCapabilities(webDriverConfig);
+        DesiredCapabilities capabilities = desiredCapabilitiesFactory.initDesiredCapabilities(webDriverConfig, userAgent, disableCookies);
         String browser = webDriverConfig.getBrowserName();
 
         switch (browser) {
@@ -66,7 +77,9 @@ public class WebDriverBuilder {
                 return phantomJsWebDriver;
             default:
                 MarionetteDriverManager.getInstance().setup();
-                return new MarionetteDriver(capabilities);
+                FirefoxDriver firefoxDriver = new FirefoxDriver(capabilities);
+                firefoxDriver.manage().window().maximize();
+                return firefoxDriver;
         }
     }
 }

@@ -1,0 +1,43 @@
+package selenium.testcases;
+
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static selenium.Screen.XLARGE;
+import static selenium.utils.annotations.browser.Browsers.CHROME;
+
+import org.junit.Test;
+import org.openqa.selenium.support.PageFactory;
+
+import selenium.SeleniumTestWrapper;
+import selenium.pageobjects.HeaderSearch;
+import selenium.pageobjects.SearchResultPage;
+import selenium.pageobjects.StartPage;
+import selenium.utils.annotations.browser.Browser;
+import selenium.utils.annotations.browser.BrowserDimension;
+
+@BrowserDimension(XLARGE)
+@Browser(skip = CHROME)
+public class SearchIT extends SeleniumTestWrapper {
+
+	StartPage startPage = PageFactory.initElements(getDriver(), StartPage.class);
+	HeaderSearch search = PageFactory.initElements(getDriver(), HeaderSearch.class);
+	SearchResultPage searchResultPage = PageFactory.initElements(getDriver(), SearchResultPage.class);
+
+	@Test
+	public void checkSearch() {
+		startPage.open();
+		search.searchFor(search.getSearchString());
+
+		// check for correct search value
+		assertThat(search.getSearchString(), is(searchResultPage.getInputValue()));
+
+		searchResultPage.clickNaviElement("Users");
+
+		// check for correct account name
+		assertThat(search.getSearchString(), is(searchResultPage.getAccountNames(0)));
+
+		// check for correct user name
+		assertThat(searchResultPage.getExpectedResult(), is(searchResultPage.getRealNames(0)));
+	}
+}

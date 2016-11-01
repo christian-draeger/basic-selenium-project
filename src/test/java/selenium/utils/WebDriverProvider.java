@@ -16,15 +16,19 @@ public class WebDriverProvider extends TestWatcher {
         this.webDriverBuilder = new WebDriverBuilder(webDriverConfig);
     }
 
-    public void useUserAgent(UserAgents userAgent) {
-        webDriverBuilder.userAgent(userAgent);
-    }
-
     public WebDriver getDriver() {
         if (driver == null) {
             driver = webDriverBuilder.toWebDriver();
         }
         return driver;
+    }
+
+    public void useUserAgent(UserAgents userAgent) {
+        webDriverBuilder.userAgent(userAgent);
+    }
+
+    public void disableCookies(boolean cookies) {
+        webDriverBuilder.disableCookies(cookies);
     }
 
     public boolean existsDriver() {

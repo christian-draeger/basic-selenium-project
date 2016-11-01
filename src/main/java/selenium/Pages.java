@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import selenium.configurations.TypedProperties;
 
-public abstract class Pages extends SeleniumFunctions{
+public abstract class Pages extends SeleniumFunctions {
 
 	public Pages(final WebDriver driver) {
 		super(driver);

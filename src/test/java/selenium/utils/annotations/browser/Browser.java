@@ -1,17 +1,15 @@
-package selenium.utils.annotations;
-
-import static selenium.Screen.SMALL;
+package selenium.utils.annotations.browser;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import selenium.Screen;
-
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.TYPE })
-public @interface BrowserDimension {
+public @interface Browser {
 
-    Screen value() default SMALL;
+    Browsers[] require() default {};
+
+    Browsers[] skip() default {};
 }

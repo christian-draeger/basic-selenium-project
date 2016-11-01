@@ -23,6 +23,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import selenium.configurations.TypedProperties;
 import utils.TestUtils;
 
 public abstract class SeleniumFunctions {
@@ -34,7 +35,14 @@ public abstract class SeleniumFunctions {
 	}
 
 	private static final int ELEMENT_WAIT_TIMEOUT_IN_SECONDS = 5;
+
 	private static final int PAGE_WAIT_TIMEOUT_IN_SECONDS = 60;
+
+	TypedProperties testData = new TypedProperties("/test_data.properties");
+
+	protected String getTestData(String key) {
+		return testData.getValue(key);
+	}
 
 	protected boolean isElementPresent(final By by) {
 		return this.driver.findElements(by).size() > 0;
