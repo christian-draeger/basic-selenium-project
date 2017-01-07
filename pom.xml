@@ -8,6 +8,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <browser.name>firefox</browser.name>
+        <failsafe.rerunFailingTestsCount>2</failsafe.rerunFailingTestsCount>
     </properties>
     <dependencies>
         <dependency>
