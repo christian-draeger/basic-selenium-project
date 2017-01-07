@@ -34,7 +34,7 @@ public class TestUtils {
 			throw new IllegalArgumentException("The number of values is smaller than one!");
 		}
 
-		final List<Integer> list = new ArrayList<Integer>();
+		final List<Integer> list = new ArrayList<>();
 
 		int index = 0;
 		loop: while (index < numberOfValues) {

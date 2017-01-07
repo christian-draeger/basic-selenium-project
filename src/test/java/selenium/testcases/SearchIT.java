@@ -4,11 +4,12 @@ package selenium.testcases;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.is;
-import static selenium.Screen.XLARGE;
 import static selenium.utils.annotations.browser.Browsers.EDGE;
 import static selenium.utils.annotations.browser.Browsers.INTERNET_EXPLORER;
 import static selenium.utils.annotations.browser.Browsers.PHANTOMJS;
+import static selenium.utils.browser.Screen.XLARGE;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.support.PageFactory;
 
@@ -27,9 +28,14 @@ public class SearchIT extends SeleniumTestWrapper {
 	HeaderSearch search = PageFactory.initElements(getDriver(), HeaderSearch.class);
 	SearchResultPage searchResultPage = PageFactory.initElements(getDriver(), SearchResultPage.class);
 
-	@Test
-	public void checkSearch() {
+	@Before
+	public void setup() {
 		startPage.open();
+	}
+
+	@Test
+	public void exampleTestForUserSearch() {
+
 		search.searchFor(search.getSearchString());
 
 		// check for correct search value

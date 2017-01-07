@@ -5,7 +5,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import selenium.Screen;
+import selenium.utils.browser.Screen;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.TYPE })

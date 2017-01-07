@@ -14,4 +14,8 @@ public class TestConfig {
     public String getBrowser() {
         return this.typedProperties.getValue("browser.name");
     }
+
+    public String getBaseUrl() {
+        return this.typedProperties.getValue("base_url");
+    }
 }

@@ -1,4 +1,4 @@
-package selenium;
+package selenium.utils.browser;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -37,7 +37,5 @@ public class SessionStorage {
     public void clearSessionStorage() {
         js.executeScript(String.format("window.sessionStorage.clear();"));
     }
-
-
 
 }

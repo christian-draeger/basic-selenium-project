@@ -1,4 +1,7 @@
-package selenium;
+package selenium.utils.browser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -25,6 +28,14 @@ public class LocalStorage {
 
     public String getKeyFromLocalStorage(final int key) {
         return (String) this.js.executeScript(String.format("return window.localStorage.key('%s');", Integer.valueOf(key)));
+    }
+
+    public List<String> getAllKeysFromLocalStorage() {
+        List<String> keys = new ArrayList<>();
+        for(int i = 0; i < getLocalStorageLength(); i++){
+            keys.add(getKeyFromLocalStorage(i));
+        }
+        return keys;
     }
 
     public Long getLocalStorageLength() {

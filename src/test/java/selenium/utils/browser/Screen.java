@@ -1,4 +1,4 @@
-package selenium;
+package selenium.utils.browser;
 
 import org.openqa.selenium.Dimension;
 

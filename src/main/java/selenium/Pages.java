@@ -19,4 +19,5 @@ public abstract class Pages extends SeleniumFunctions {
 	protected void open(){
 		driver.get(baseUrl);
 	}
+
 }

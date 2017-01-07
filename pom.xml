@@ -90,37 +90,37 @@
 
     <profiles>
         <profile>
-            <id>phantomjs</id>
+            <id>browser-phantomjs</id>
             <properties>
                 <browser.name>phantomjs</browser.name>
             </properties>
         </profile>
         <profile>
-            <id>chrome</id>
+            <id>browser-chrome</id>
             <properties>
                 <browser.name>chrome</browser.name>
             </properties>
         </profile>
         <profile>
-            <id>firefox</id>
+            <id>browser-firefox</id>
             <properties>
                 <browser.name>firefox</browser.name>
             </properties>
         </profile>
         <profile>
-            <id>edge</id>
+            <id>browser-edge</id>
             <properties>
                 <browser.name>edge</browser.name>
             </properties>
         </profile>
         <profile>
-            <id>internetExplorer</id>
+            <id>browser-internetExplorer</id>
             <properties>
                 <browser.name>internetexplorer</browser.name>
             </properties>
         </profile>
         <profile>
-            <id>opera</id>
+            <id>browser-opera</id>
             <properties>
                 <browser.name>opera</browser.name>
             </properties>
