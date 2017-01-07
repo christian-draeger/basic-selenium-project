@@ -26,10 +26,10 @@ class DesiredCapabilitiesFactory {
 		// Set specific settings for firefox.
 		if (browser.equals("firefox")) {
 			FirefoxProfile profile = new FirefoxProfile();
-			profile.setPreference("general.useragent.override", userAgent);
-			if (disableCookies) {
-				profile.setPreference("network.cookie.cookieBehavior", 2);
-			}
+			// profile.setPreference("general.useragent.override", userAgent);
+			// if (disableCookies) {
+			// 	profile.setPreference("network.cookie.cookieBehavior", 2);
+			// }
 			capabilities.setCapability(FirefoxDriver.PROFILE, profile);
 		}
 

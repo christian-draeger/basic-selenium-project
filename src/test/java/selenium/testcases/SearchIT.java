@@ -2,9 +2,12 @@ package selenium.testcases;
 
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.is;
 import static selenium.Screen.XLARGE;
-import static selenium.utils.annotations.browser.Browsers.CHROME;
+import static selenium.utils.annotations.browser.Browsers.EDGE;
+import static selenium.utils.annotations.browser.Browsers.INTERNET_EXPLORER;
+import static selenium.utils.annotations.browser.Browsers.PHANTOMJS;
 
 import org.junit.Test;
 import org.openqa.selenium.support.PageFactory;
@@ -17,7 +20,7 @@ import selenium.utils.annotations.browser.Browser;
 import selenium.utils.annotations.browser.BrowserDimension;
 
 @BrowserDimension(XLARGE)
-@Browser(skip = CHROME)
+@Browser(skip = { INTERNET_EXPLORER, EDGE, PHANTOMJS })
 public class SearchIT extends SeleniumTestWrapper {
 
 	StartPage startPage = PageFactory.initElements(getDriver(), StartPage.class);
@@ -34,10 +37,8 @@ public class SearchIT extends SeleniumTestWrapper {
 
 		searchResultPage.clickNaviElement("Users");
 
-		// check for correct account name
-		assertThat(search.getSearchString(), is(searchResultPage.getAccountNames(0)));
+		// check account name is in hit list
+		assertThat(searchResultPage.getAccountNames(), hasItem(search.getSearchString()));
 
-		// check for correct user name
-		assertThat(searchResultPage.getExpectedResult(), is(searchResultPage.getRealNames(0)));
 	}
 }

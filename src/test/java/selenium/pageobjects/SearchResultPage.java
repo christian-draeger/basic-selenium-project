@@ -1,5 +1,6 @@
 package selenium.pageobjects;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -23,10 +24,10 @@ public class SearchResultPage extends Pages {
 	@FindBy(css = ".counter")
 	private WebElement counter;
 
-	@FindBy(css = ".user-list-info")
-	private List<WebElement> userList;
+	@FindBy(css = "#user_search_results")
+	private WebElement userList;
 
-	@FindBy(css = ".user-list-info a em")
+	@FindBy(css = ".user-list-info em")
 	private List<WebElement> userListAccountNames;
 
 	public String getInputValue(){
@@ -46,12 +47,14 @@ public class SearchResultPage extends Pages {
 		return getTestData("search.result");
 	}
 
-	public String getRealNames(int index) {
-		return userList.get(index).getText();
-	}
+	public List<String> getAccountNames() {
+		waitForElement(userList);
 
-	public String getAccountNames(int index) {
-		waitForElement(userList.get(0));
-		return userListAccountNames.get(index).getText();
+		List<String> userAccountNames = new ArrayList<>();
+		for(WebElement userAccountName : userListAccountNames){
+			userAccountNames.add(userAccountName.getText());
+		}
+
+		return userAccountNames;
 	}
 }

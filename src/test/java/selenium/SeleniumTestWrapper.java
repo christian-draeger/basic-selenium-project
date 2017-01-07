@@ -84,7 +84,7 @@ public abstract class SeleniumTestWrapper {
 
 	@After
 	public void closeBrowser(){
-		getDriver().close();
+		getDriver().quit();
 	}
 
 
