@@ -18,10 +18,10 @@ public class SearchResultPage extends Pages {
 	@FindBy(name = "q")
 	private WebElement searchInput;
 
-	@FindBy(css = "nav.menu a")
+	@FindBy(css = "nav.underline-nav a")
 	private List<WebElement> sideNavi;
 
-	@FindBy(css = ".counter")
+	@FindBy(css = ".Counter")
 	private WebElement counter;
 
 	@FindBy(css = "#user_search_results")
