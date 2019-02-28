@@ -10,6 +10,7 @@ public abstract class Pages extends SeleniumFunctions {
 		super(driver);
 	}
 
+	//Just testing comment
 	private String baseUrl = new TypedProperties("/test_config.properties").getValue("base_url");
 
 	protected void open(String path){
