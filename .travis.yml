@@ -1,4 +1,3 @@
-os: windows
 language: java
 jdk:
   - oraclejdk8
