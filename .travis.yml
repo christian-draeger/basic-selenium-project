@@ -3,5 +3,5 @@ jdk:
   - oraclejdk8
 script: >-
   ./mvnw clean verify -Pbrowser-chrome
-  ./mvnw clean verify -Pbrowser-chrome-headless
-  ./mvnw clean verify -Pbrowser-firefox
+  && ./mvnw clean verify -Pbrowser-chrome-headless
+  && ./mvnw clean verify -Pbrowser-firefox
