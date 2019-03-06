@@ -11,8 +11,9 @@ To execute the tests just browse to the path where the basic-selenium-project is
 ## Implemented Browsers
 Thanks to the awesome [webdrivermanager](https://github.com/bonigarcia/webdrivermanager) it supports the following browsers and automatically downloads OS specific binaries for:
 * Chrome
+* Chrome Headless
 * Firefox
-* PhantomJS
+* Firefox Headless
 * Opera
 * Internet Explorer
 * Edge
@@ -22,7 +23,7 @@ The webdriver setup is based on the [WebDriverBuilder](https://github.com/christ
 to have a separation between driver instantiation and browser specific settings.
 
 ## Page Objects Pattern
-page object pattern is used to have reusable WebElements/small helper methods seperated from actual test classes and give the opportunity to have nice structured and easily readable tests (without the overhead of BDD-Frameworks like Cucumber or JBehave).
+page object pattern is used to have reusable WebElements/small helper methods separated from actual test classes and give the opportunity to have nice structured and easily readable tests (without the overhead of BDD-Frameworks like Cucumber or JBehave).
 
 ## Annotations
 Beside a bunch of [Convenient Methods] the basic-selenium-project provides some nice custom annotations to comfortably set some test conditions and/or assumptions
@@ -38,12 +39,12 @@ skip test if browser equals firefox:
 
 it also supports list of browsers, e.g. skip test if browser equals firefox or phantomjs
 ```
-@Browser(skip = { FIREFOX, PHANTOMJS })
+@Browser(skip = { FIREFOX, OPERA })
 ```
 
 it can be used the other way around as well e.g. if you want a certain test just to be executed with phantomjs you can do something like this:
 ```
-@Browser(require = PHANTOMJS)
+@Browser(require = CHROME)
 ```
 The browser require option is working equivalent to the skip option and also supports list of browsers
 
