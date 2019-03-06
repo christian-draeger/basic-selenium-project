@@ -48,29 +48,25 @@ public class WebDriverBuilder {
         switch (browser) {
             case "chrome": {
                 WebDriverManager.chromedriver().setup();
-                ChromeOptions options = desiredCapabilitiesFactory.chromeOptions(capabilities, userAgent);
+                ChromeOptions options = desiredCapabilitiesFactory.chromeOptions(capabilities, userAgent, disableCookies);
                 driver = new ChromeDriver(options);
                 break;
             }
             case "chrome-headless": {
                 WebDriverManager.chromedriver().setup();
-                ChromeOptions options = desiredCapabilitiesFactory.chromeOptions(capabilities, userAgent);
+                ChromeOptions options = desiredCapabilitiesFactory.chromeOptions(capabilities, userAgent, disableCookies);
                 driver = new ChromeDriver(options.setHeadless(true));
                 break;
             }
             case "edge": {
                 WebDriverManager.edgedriver().setup();
-                EdgeOptions options = new EdgeOptions();
-//                edgeOptions.addArguments("user-agent=" + userAgent);
-                options.merge(capabilities);
+                EdgeOptions options = new EdgeOptions().merge(capabilities);
                 driver = new EdgeDriver(options);
                 break;
             }
             case "internetexplorer": {
                 WebDriverManager.iedriver().setup();
-                InternetExplorerOptions options = new InternetExplorerOptions();
-//                ieOptions.addArguments("user-agent=" + userAgent);
-                options.merge(capabilities);
+                InternetExplorerOptions options = new InternetExplorerOptions().merge(capabilities);
                 driver = new InternetExplorerDriver(options);
                 break;
             }
@@ -81,9 +77,9 @@ public class WebDriverBuilder {
                 break;
             }
             case "firefox-headless": {
-                WebDriverManager.chromedriver().setup();
-                ChromeOptions options = desiredCapabilitiesFactory.chromeOptions(capabilities, userAgent);
-                driver = new ChromeDriver(options.setHeadless(true));
+                WebDriverManager.firefoxdriver().setup();
+                FirefoxOptions options = desiredCapabilitiesFactory.firefoxOptions(capabilities, userAgent);
+                driver = new FirefoxDriver(options.setHeadless(true));
                 break;
             }
             default:

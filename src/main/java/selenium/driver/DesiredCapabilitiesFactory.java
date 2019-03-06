@@ -1,5 +1,7 @@
 package selenium.driver;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -29,11 +31,16 @@ class DesiredCapabilitiesFactory {
 		return capabilities;
 	}
 
-	ChromeOptions chromeOptions(DesiredCapabilities capabilities, String userAgent) {
+	ChromeOptions chromeOptions(DesiredCapabilities capabilities, String userAgent, boolean disableCookies) {
+        Map<String, Integer> prefs = new HashMap();
+        if (disableCookies) {
+            prefs.put("profile.default_content_setting_values.cookies", 2);
+        }
 		return new ChromeOptions()
 				.addArguments("user-agent=" + userAgent)
 				.addArguments("--disable-gpu")
 				.addArguments("--dns-prefetch-disable")
+                .setExperimentalOption("prefs", prefs)
 				.merge(capabilities);
 	}
 
