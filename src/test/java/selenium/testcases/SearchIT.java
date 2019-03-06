@@ -24,9 +24,9 @@ import selenium.utils.annotations.browser.BrowserDimension;
 @Browser(skip = { INTERNET_EXPLORER, EDGE, PHANTOMJS })
 public class SearchIT extends SeleniumTestWrapper {
 
-	StartPage startPage = PageFactory.initElements(getDriver(), StartPage.class);
-	HeaderSearch search = PageFactory.initElements(getDriver(), HeaderSearch.class);
-	SearchResultPage searchResultPage = PageFactory.initElements(getDriver(), SearchResultPage.class);
+	private StartPage startPage = PageFactory.initElements(getDriver(), StartPage.class);
+	private HeaderSearch search = PageFactory.initElements(getDriver(), HeaderSearch.class);
+	private SearchResultPage searchResultPage = PageFactory.initElements(getDriver(), SearchResultPage.class);
 
 	@Before
 	public void setup() {

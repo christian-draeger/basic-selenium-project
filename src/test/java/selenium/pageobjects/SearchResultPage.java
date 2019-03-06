@@ -18,7 +18,7 @@ public class SearchResultPage extends Pages {
 	@FindBy(name = "q")
 	private WebElement searchInput;
 
-	@FindBy(css = "nav.underline-nav a")
+	@FindBy(css = "nav.menu a")
 	private List<WebElement> sideNavi;
 
 	@FindBy(css = ".Counter")
