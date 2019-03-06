@@ -1,0 +1,6 @@
+windows_container:
+  image: cirrusci/windowsservercore:2019
+  os_version: 2019
+
+task:
+  script: mvnw.cmd clean verify -Pbrowser-chrome-headless
