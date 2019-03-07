@@ -1,10 +1,7 @@
 package selenium.testcases;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.is;
-import static selenium.utils.annotations.browser.Browsers.PHANTOMJS;
+import static org.assertj.core.api.Java6Assertions.assertThat;
+import static selenium.utils.annotations.browser.Browsers.INTERNET_EXPLORER;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +13,7 @@ import selenium.utils.annotations.browser.Browser;
 import selenium.utils.browser.LocalStorage;
 
 /** session storage works exactly the same **/
-@Browser(skip = PHANTOMJS)
+@Browser(skip = INTERNET_EXPLORER)
 public class DoSomeThingWithLocalStorageIT extends SeleniumTestWrapper {
 
     StartPage startPage = PageFactory.initElements(getDriver(), StartPage.class);
@@ -29,7 +26,7 @@ public class DoSomeThingWithLocalStorageIT extends SeleniumTestWrapper {
 
     @Test
     public void checkSomeValueFromCertainLocalStorageEntry() {
-        assertThat(localStorage.getItemFromLocalStorage("logged-in"), is("false"));
+        assertThat(localStorage.getItemFromLocalStorage("logged-in")).isEqualTo("false");
     }
 
     @Test
@@ -37,35 +34,35 @@ public class DoSomeThingWithLocalStorageIT extends SeleniumTestWrapper {
         localStorage.setItemInLocalStorage("myLocalStorageEntry", "added by selenium");
 
         // get all keys from localstorage and check if added entry is present
-        assertThat(localStorage.getAllKeysFromLocalStorage(), hasItem("myLocalStorageEntry"));
+        assertThat(localStorage.getAllKeysFromLocalStorage()).contains("myLocalStorageEntry");
 
         // check if custom localStorage entry has been added successfully with expected value
-        assertThat(localStorage.getItemFromLocalStorage("myLocalStorageEntry"), is("added by selenium"));
+        assertThat(localStorage.getItemFromLocalStorage("myLocalStorageEntry")).isEqualTo("added by selenium");
     }
 
     @Test
     public void deleteCertainLocalStorageEntry() {
 
         // check if localStorage entry exists initially
-        assertThat(localStorage.isItemPresentInLocalStorage("logged-in"), is(true));
+        assertThat(localStorage.isItemPresentInLocalStorage("logged-in")).isTrue();
 
         // delete certain localStorage entry
         localStorage.removeItemFromLocalStorage("logged-in");
 
         // check if localStorage entry was deleted successfully
-        assertThat(localStorage.isItemPresentInLocalStorage("logged-in"), is(false));
+        assertThat(localStorage.isItemPresentInLocalStorage("logged-in")).isFalse();
     }
 
     @Test
     public void deleteAllLocalStorageEntries() {
 
         // check if number of localStorage entries is greater than 0
-        assertThat(localStorage.getLocalStorageLength(), greaterThan(0L));
+        assertThat(localStorage.getLocalStorageLength()).isGreaterThan(0L);
 
         // delete all localStorage entries
         localStorage.clearLocalStorage();
 
         // check if number of localStorage entries is 0
-        assertThat(localStorage.getLocalStorageLength(), is(0L));
+        assertThat(localStorage.getLocalStorageLength()).isZero();
     }
 }

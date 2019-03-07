@@ -1,8 +1,6 @@
 package selenium.testcases;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.is;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assume.assumeFalse;
 
 import org.junit.Before;
@@ -15,8 +13,8 @@ import selenium.utils.browser.Cookies;
 
 public class DoSomeThingWithCookiesIT extends SeleniumTestWrapper {
 
-    StartPage startPage = PageFactory.initElements(getDriver(), StartPage.class);
-    Cookies cookies = new Cookies(getDriver());
+    private StartPage startPage = PageFactory.initElements(getDriver(), StartPage.class);
+    private Cookies cookies = new Cookies(getDriver());
 
     @Before
     public void setup() {
@@ -25,7 +23,7 @@ public class DoSomeThingWithCookiesIT extends SeleniumTestWrapper {
 
     @Test
     public void checkSomeValueFromCertainCookie() {
-        assertThat(cookies.getValueOfCookieNamed("logged_in"), is("no"));
+        assertThat(cookies.getValueOfCookieNamed("logged_in")).isEqualTo("no");
     }
 
     @Test
@@ -35,32 +33,32 @@ public class DoSomeThingWithCookiesIT extends SeleniumTestWrapper {
 
         cookies.addCookie("myTestCookie", "added by selenium","github.com", "/", cookies.getValideExpireDate());
         // check if custom cookie has been added successfully
-        assertThat(cookies.getValueOfCookieNamed("myTestCookie"), is("added by selenium"));
+        assertThat(cookies.getValueOfCookieNamed("myTestCookie")).isEqualTo("added by selenium");
     }
 
     @Test
     public void deleteCertainCookie() {
 
         // check if cookie exists initially
-        assertThat(cookies.isCookiePresent("logged_in"), is(true));
+        assertThat(cookies.isCookiePresent("logged_in")).isTrue();
 
         // delete certain cookie
         cookies.deleteCookieNamed("logged_in");
 
         // check if cookie was deleted successfully
-        assertThat(cookies.isCookiePresent("logged_in"), is(false));
+        assertThat(cookies.isCookiePresent("logged_in")).isFalse();
     }
 
     @Test
     public void deleteAllCookies() {
 
         // check if number of localStorage is greater than 0
-        assertThat(cookies.getAllCookies().size(), greaterThan(0));
+        assertThat(cookies.getAllCookies().size()).isGreaterThan(0);
 
         // delete all localStorage
         cookies.deleteAllCookies();
 
         // check if number of localStorage is 0
-        assertThat(cookies.getAllCookies().size(), is(0));
+        assertThat(cookies.getAllCookies().size()).isZero();
     }
 }

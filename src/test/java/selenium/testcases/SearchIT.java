@@ -1,12 +1,9 @@
 package selenium.testcases;
 
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.is;
+import static org.assertj.core.api.Assertions.assertThat;
 import static selenium.utils.annotations.browser.Browsers.EDGE;
 import static selenium.utils.annotations.browser.Browsers.INTERNET_EXPLORER;
-import static selenium.utils.annotations.browser.Browsers.PHANTOMJS;
 import static selenium.utils.browser.Screen.XLARGE;
 
 import org.junit.Before;
@@ -21,7 +18,7 @@ import selenium.utils.annotations.browser.Browser;
 import selenium.utils.annotations.browser.BrowserDimension;
 
 @BrowserDimension(XLARGE)
-@Browser(skip = { INTERNET_EXPLORER, EDGE, PHANTOMJS })
+@Browser(skip = { INTERNET_EXPLORER, EDGE })
 public class SearchIT extends SeleniumTestWrapper {
 
 	private StartPage startPage = PageFactory.initElements(getDriver(), StartPage.class);
@@ -39,12 +36,12 @@ public class SearchIT extends SeleniumTestWrapper {
 		search.searchFor(search.getSearchString());
 
 		// check for correct search value
-		assertThat(search.getSearchString(), is(searchResultPage.getInputValue()));
+		assertThat(search.getSearchString()).isEqualTo(searchResultPage.getInputValue());
 
 		searchResultPage.clickNaviElement("Users");
 
 		// check account name is in hit list
-		assertThat(searchResultPage.getAccountNames(), hasItem(search.getSearchString()));
+		assertThat(searchResultPage.getAccountNames()).contains(search.getSearchString());
 
 	}
 }
