@@ -1,3 +1,8 @@
+>#### I did a new scaffold Selenium Project with a much more modern and handy stack. 
+>#### It provides all the functionality of this project and even more benefits.
+>#### Please have a look here: https://github.com/christian-draeger/basic-fluentlenium-project
+
+
 [![N|Solid](https://api.travis-ci.org/christian-draeger/basic-selenium-project.svg?branch=master)](https://travis-ci.org/christian-draeger/basic-selenium-project)
 
 # basic-selenium-project
