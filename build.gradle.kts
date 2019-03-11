@@ -19,6 +19,7 @@ apply<TestLoggerPlugin>()
 configure<TestLoggerExtension> {
     setTheme("mocha-parallel")
     slowThreshold = 6000
+    showStandardStreams = true
 }
 
 dependencies {
@@ -34,7 +35,6 @@ dependencies {
     testCompile("net.lightbody.bmp:browsermob-core:$browsermobVersion")
     testCompile("it.skrape:core:0.3.1")
 
-    testCompile(kotlin("test-junit"))
     testCompile("org.assertj:assertj-core:3.12.0")
     testCompile("org.fluentlenium:fluentlenium-junit:$fluentleniumVersion")
     testCompile("org.fluentlenium:fluentlenium-assertj:$fluentleniumVersion")
@@ -47,6 +47,7 @@ dependencies {
 tasks {
     val test by getting(Test::class) {
         systemProperty("browser", System.getProperty("browser"))
+        maxParallelForks = 6
     }
 }
 
