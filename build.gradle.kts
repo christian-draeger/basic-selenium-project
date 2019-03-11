@@ -5,13 +5,14 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.3.20"
     id("com.adarshr.test-logger") version "1.6.0"
+    id("io.qameta.allure") version "2.7.0"
 }
 
 group = "io.github.christian-draeger"
 version = "1.0-SNAPSHOT"
 
 repositories {
-    mavenCentral()
+    jcenter()
 }
 
 apply<TestLoggerPlugin>()
