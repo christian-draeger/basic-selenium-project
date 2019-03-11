@@ -8,6 +8,7 @@ import org.junit.BeforeClass
 import org.junit.Rule
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
+import org.openqa.selenium.Dimension
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.logging.LogType
 import org.openqa.selenium.support.events.EventFiringWebDriver
@@ -35,7 +36,7 @@ open class AbstractUiIT : FluentTestWithRetry() {
 		driver.manage().timeouts().pageLoadTimeout(timeout, TimeUnit.SECONDS)
 		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS)
 		driver.manage().timeouts().setScriptTimeout(15, TimeUnit.SECONDS)
-		driver.manage().window().maximize()
+        driver.manage().window().size = Dimension(1400, 900)
 
 		return EventFiringWebDriver(driver)
 	}
