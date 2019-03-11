@@ -47,6 +47,7 @@ Thanks to the awesome [webdrivermanager](https://github.com/bonigarcia/webdriver
 * Chrome `./gradlew clean test -Dbrowser=chrome`
 * Firefox Headless `./gradlew clean test -Dbrowser=firefox-headless`
 * Firefox `./gradlew clean test -Dbrowser=firefox`
+* Opera `./gradlew clean test -Dbrowser=opera`
 
 #### 🔥 Custom Annotations
 ##### (in progress, not implemented yet)
@@ -76,7 +77,8 @@ The number of test that will be executed at the same time is configurable (defau
 #### 🎯 Centralized Project Config
 ##### (in progress, not implemented yet)
 All global configurations are living in a properties file (`resources/config.properties`) and can be adjusted.
-It gives you the possibility to edit the global project behaviour in one place without messing around with project/setup specific code. 
+It gives you the possibility to edit the global project behaviour in one place without messing around with project/setup specific code.
+Furthermore all properties can be overridden via system properties.
 
 #### 🔁 Retries
 Conveniently run a single Test Multiple Times by using the implemented Test Rule.
