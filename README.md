@@ -2,7 +2,7 @@
 
 ## 🚧🚸 Work in Progress
 
-Selenium Kotlin Example
+Basic Selenium Project
 ===================================
 
 This project is written in **[Kotlin](https://kotlinlang.org)** and will serve an example of implementing a 
