@@ -1,3 +1,4 @@
+package tests
 import config.AbstractUiIT
 import org.fluentlenium.assertj.FluentLeniumAssertions.assertThat
 import org.junit.Test

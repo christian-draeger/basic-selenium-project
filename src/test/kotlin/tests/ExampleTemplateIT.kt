@@ -1,4 +1,4 @@
-
+package tests
 import it.skrape.element
 import it.skrape.expect
 import it.skrape.matchers.toBe
