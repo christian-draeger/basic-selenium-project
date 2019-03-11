@@ -7,6 +7,7 @@
 gradle-app.setting
 
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+*.jar
 !gradle-wrapper.jar
 
 # Cache of project
@@ -21,7 +22,6 @@ gradle-app.setting
 # Log file
 *.log
 
-*.jar
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
