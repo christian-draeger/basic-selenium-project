@@ -61,6 +61,7 @@ Furthermore obvious markers will be set at succeeded (green marker) and failed (
 To get an even more clear overview of the test execution the project uses the gradle TestLoggerPlugin to pretty print executed tests.
 
 #### 👩‍👩‍👦‍👦 Parallel Test Execution
+##### (in progress, not implemented yet)
 The Project is proconfigured to run the tests in parallel.
 The number of test that will be executed at the same time is configurable (defaults to 4) or can be deactivated if required.
 
@@ -69,6 +70,7 @@ Conveniently run a single Test Multiple Times by using the implemented Test Rule
 It's possible to rerun failing tests automatically and mark them as flaky.
 
 #### ⛩️ Proxy
+##### (in progress, not implemented yet)
 The [BrowserMob Proxy](https://github.com/lightbody/browsermob-proxy) is already implemented and can be used to Mock External Requests.
 This is especially helpful to mock dynamic data on the page under test, modify parts of the request that are not possible with some browsers (like setting custom headers in Internet Explorer) as well as speeding up 
 your tests by mocking thinks that are out of scope of a certain test (for instance tracking scripts).
@@ -78,10 +80,17 @@ Fluentlenium extends AssertJ with FluentWebElement, FluentList and FluentPage cu
 Therefore you'll be able to write more intuitive and selenium specific assertions to give you the possibility to easily assert things like if an element is displayed etc.
 
 #### ⏱️ Waits
-Testing web applications that are asynchroniously loading / rerendering parts of the page can become hard to test with Selenium. [Awaitility](https://github.com/awaitility/awaitility) is a DSL that allows you to express expectations of an asynchronous system in a concise and easy to read manner and is therefore added to this project.
+Testing web applications that are asynchroniously loading / rerendering parts of the page can become hard to test with Selenium. 
+[Awaitility](https://github.com/awaitility/awaitility) is a DSL that allows you to express expectations of an asynchronous system in a concise and easy to read manner and is therefore added to this project.
 
 #### 📊 Allure Test Result Report
-[Allure](http://allure.qatools.ru) provides a good representation of test execution output and is designed to create reports that are clear to everyone by creating graphs regarding test execution time, overall test result overviews, test result history, etc.
+##### (in progress, not implemented yet)
+[Allure](http://allure.qatools.ru) provides a good representation of test execution output and is designed to create 
+reports that are clear to everyone by creating graphs regarding test execution time, 
+overall test result overviews, test result history, etc.
 
 #### 🚀 Template Testing
-From time to time we are writing tests that doesn't need browser interactions like clicking or execution of Javascript. We'll use template testing using [skrape{it}](https://docs.skrape.it/docs/) to achieve these types of tests because it's much much faster and more robust then Selenium. Please have a look at the [example test](https://github.com/christian-draeger/selenium-kotlin-example/blob/13c75c3a86be3b09eabf7f70a6b92c5451f95c9d/src/test/kotlin/ExampleTemplateIT.kt)
+From time to time we are writing tests that doesn't need browser interactions like clicking or 
+execution of Javascript. We'll use template testing using [skrape{it}](https://docs.skrape.it/docs/) 
+to achieve these types of tests because it's much much faster and more robust then Selenium. 
+Please have a look at the [example test](https://github.com/christian-draeger/selenium-kotlin-example/blob/13c75c3a86be3b09eabf7f70a6b92c5451f95c9d/src/test/kotlin/ExampleTemplateIT.kt)
