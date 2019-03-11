@@ -1,0 +1,23 @@
+<configuration scan="true" scanPeriod="30 seconds" debug="false">
+
+	<jmxConfigurator />
+
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<withJansi>true</withJansi>
+
+		<encoder>
+			<pattern>[TEST] %highlight(%.-1level) %date{HH:mm:ss.SSS} [%30.30logger] %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="org" level="WARN" />
+	<logger name="com" level="WARN" />
+	<logger name="io" level="WARN" />
+	<logger name="net" level="WARN" />
+
+	<root>
+		<level value="INFO" />
+		<appender-ref ref="CONSOLE" />
+	</root>
+
+</configuration>
