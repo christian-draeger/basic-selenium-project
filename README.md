@@ -11,7 +11,7 @@ Everything is set up and tests can be added straight away.
 Used Testrunner is JUnit.
 Since Kotlin has an excellent Java interop it's perfectly fine to write your Tests in Java if you want, it will work out of the box.
 If you are looking for a pure Java project please have a look at the [legacy branch](https://github.com/christian-draeger/basic-selenium-project/tree/legacy) of this project
-To execute the tests just browse to the path where the selenium-kotlin-example is located via terminal and type `./gradlew test` or execute the tests in your IDE.
+To execute the tests just browse to the path where the selenium-kotlin-example is located via terminal and type `./gradlew clean test` or execute the tests in your IDE.
 The Project will use Chrome Browser in Headless mode by default / if no other browser is stated 
 (see list of implemented browsers for more info on how to use them).
 
@@ -23,29 +23,30 @@ The Project will use Chrome Browser in Headless mode by default / if no other br
 #### Features:
 * [couple of browsers preconfigured](#-implemented-browsers)
     * downloading OS specific binaries automatically
-* [Custom Annotations](#-custom-annotations) 🔜
+* [custom annotations](#-custom-annotations) 🔜
 * [take screenshot on test failure](#-take-screenshots)
-* [Highlight clicked elements](#-highlight-clicked-elements)
+* [highlight clicked elements](#-highlight-clicked-elements)
 * [pretty and highly readable console output](#-beautiful-console-output)
 * [parallel test execution ready](#-parallel-test-execution) 🔜
-* [Retries](#-retries)
+* [centralized project config](#-centralized-project-config) 🔜
+* [retries](#-retries)
 * include / exclude test from execution depending on browser 🔜
     * idiomatic usage via provided annotations
 * [proxy to intercept / modify / mock http-requests](#-proxy) 🔜
 * assertions, waits and test extensions
     * [assertions with selenium specific and type safe matchers](#-assertions)
     * [waiting functions](#-waits)
-* [Meaningful Test Result report](#-allure-test-result-report) 🔜
-* [Template Testing](#-template-testing)
+* [meaningful test result report](#-allure-test-result-report) 🔜
+* [template testing](#-template-testing)
 
 ## Benefits
 
 #### 💻 Implemented Browsers
 Thanks to the awesome [webdrivermanager](https://github.com/bonigarcia/webdrivermanager) it supports the following browsers and automatically downloads OS specific binaries for:
-* Chrome Headless (default) `./gradlew test`
-* Chrome `./gradlew test -Dbrowser=chrome`
-* Firefox Headless `./gradlew test -Dbrowser=firefox-headless`
-* Firefox `./gradlew test -Dbrowser=firefox`
+* Chrome Headless (default) `./gradlew clean test`
+* Chrome `./gradlew clean test -Dbrowser=chrome`
+* Firefox Headless `./gradlew clean test -Dbrowser=firefox-headless`
+* Firefox `./gradlew clean test -Dbrowser=firefox`
 
 #### 🔥 Custom Annotations
 ##### (in progress, not implemented yet)
@@ -69,8 +70,13 @@ To get an even more clear overview of the test execution the project uses the gr
 
 #### 👩‍👩‍👦‍👦 Parallel Test Execution
 ##### (in progress, not implemented yet)
-The Project is proconfigured to run the tests in parallel.
+The Project is preconfigured to run the tests in parallel.
 The number of test that will be executed at the same time is configurable (defaults to 4) or can be deactivated if required.
+
+#### 🎯 Centralized Project Config
+##### (in progress, not implemented yet)
+All global configurations are living in a properties file (`resources/config.properties`) and can be adjusted.
+It gives you the possibility to edit the global project behaviour in one place without messing around with project/setup specific code. 
 
 #### 🔁 Retries
 Conveniently run a single Test Multiple Times by using the implemented Test Rule.
