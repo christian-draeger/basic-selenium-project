@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/christian-draeger/basic-fluentlenium-project.svg?branch=master)](https://travis-ci.org/christian-draeger/basic-fluentlenium-project)
+[![Build Status](https://travis-ci.org/christian-draeger/basic-selenium-project.svg?branch=master)](https://travis-ci.org/christian-draeger/basic-selenium-project)
 
 ## 🚧🚸 Work in Progress
 
