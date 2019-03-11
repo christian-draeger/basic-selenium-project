@@ -1,9 +1,8 @@
->#### I did a new scaffold Selenium Project with a much more modern and handy stack. 
->#### It provides all the functionality of this project and even more benefits.
->#### Please have a look here: https://github.com/christian-draeger/basic-fluentlenium-project
+>#### This is the legacy version of the basic-selenium-project 
+>#### Please use the master branch for a more modern and advanced stack.
 
 
-[![N|Solid](https://api.travis-ci.org/christian-draeger/basic-selenium-project.svg?branch=master)](https://travis-ci.org/christian-draeger/basic-selenium-project)
+[![N|Solid](https://api.travis-ci.org/christian-draeger/basic-selenium-project.svg?branch=legacy)](https://travis-ci.org/christian-draeger/basic-selenium-project)
 
 # basic-selenium-project
 This project is written in java and will serve an example of implementing a Selenium test project with Selenium3 and Maven.
