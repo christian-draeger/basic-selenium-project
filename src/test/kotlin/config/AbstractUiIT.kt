@@ -4,10 +4,10 @@ import org.fluentlenium.configuration.ConfigurationProperties
 import org.fluentlenium.core.search.SearchFilter
 import org.junit.After
 import org.junit.Before
+import org.junit.BeforeClass
 import org.junit.Rule
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
-import org.openqa.selenium.Dimension
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.logging.LogType
 import org.openqa.selenium.support.events.EventFiringWebDriver
@@ -25,15 +25,25 @@ open class AbstractUiIT : FluentTestWithRetry() {
 			"chrome" -> chrome()
 			"chrome-headless" -> chromeHeadless()
 			"firefox-headless" -> firefoxHeadless()
+			"opera" -> opera()
+			"ie" -> internetExplorer()
+			"edge" -> edge()
+			"safari" -> safari()
 			else -> chromeHeadless()
 		}
 
 		driver.manage().timeouts().pageLoadTimeout(timeout, TimeUnit.SECONDS)
 		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS)
 		driver.manage().timeouts().setScriptTimeout(15, TimeUnit.SECONDS)
-		driver.manage().window().size = Dimension(1400, 900)
+		driver.manage().window().maximize()
 
 		return EventFiringWebDriver(driver)
+	}
+
+	companion object {
+		@BeforeClass @JvmStatic fun setup() {
+			println("starting test run with ${System.getProperty("browser", "chrome-headless")}")
+		}
 	}
 
 	@Before

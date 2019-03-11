@@ -48,6 +48,9 @@ Thanks to the awesome [webdrivermanager](https://github.com/bonigarcia/webdriver
 * Firefox Headless `./gradlew clean test -Dbrowser=firefox-headless`
 * Firefox `./gradlew clean test -Dbrowser=firefox`
 * Opera `./gradlew clean test -Dbrowser=opera`
+* Internet Explorer `./gradlew clean test -Dbrowser=ie` (will work on windows machines only)
+* Edge `./gradlew clean test -Dbrowser=ie` (will work on windows machines only)
+* Safari `./gradlew clean test -Dbrowser=safari` (will work on OSX machines only)
 
 #### 🔥 Custom Annotations
 ##### (in progress, not implemented yet)
