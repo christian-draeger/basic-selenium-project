@@ -46,6 +46,12 @@ Thanks to the awesome [webdrivermanager](https://github.com/bonigarcia/webdriver
 * Firefox Headless `./gradlew test -Dbrowser=firefox-headless`
 * Firefox `./gradlew test -Dbrowser=firefox`
 
+#### 🔥 Custom Annotations
+##### (in progress, not implemented yet)
+The project includes custom annotations to comfortably set some test conditions and/or assumptions
+like skip/require certain tests on execution with specific browsers and/or override driver options like browser dimension, headers, cookies, etc.
+This will increase the possibility to write easily readable and flexible tests.
+
 #### 📸 Take Screenshots
 On test failures screenshots will automatically be taken and stored under `build/screenshots`.
 The screenshot files will be named with a combination of the class name and the test method name.
