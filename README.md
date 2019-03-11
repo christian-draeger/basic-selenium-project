@@ -23,6 +23,7 @@ The Project will use Chrome Browser in Headless mode by default / if no other br
 #### Features:
 * [couple of browsers preconfigured](#-implemented-browsers)
     * downloading OS specific binaries automatically
+* [Custom Annotations](#-custom-annotations) 🔜
 * [take screenshot on test failure](#-take-screenshots)
 * [Highlight clicked elements](#-highlight-clicked-elements)
 * [pretty and highly readable console output](#-beautiful-console-output)
