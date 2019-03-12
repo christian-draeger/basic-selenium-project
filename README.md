@@ -20,7 +20,7 @@ If you are looking for a pure Java project that uses maven as build tool please 
 >#### ℹ️ FluentLenium is a website automation framework which extends Selenium to write reliable and resilient UI functional tests. This framework is React ready. Written and maintained by people who are automating browser-based tests on a daily basis.
 
 ### Prerequisites
-* \>=JDK8 installed
+* \>=**JDK11** installed
 
 #### Features:
 * [couple of browsers preconfigured](#-implemented-browsers)

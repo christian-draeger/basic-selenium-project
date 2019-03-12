@@ -23,7 +23,7 @@ configure<TestLoggerExtension> {
 }
 
 dependencies {
-    val fluentleniumVersion = "3.7.1"
+    val fluentleniumVersion = "4.1.1"
     val seleniumVersion = "3.141.59"
     val webdriverManagerVersion = "3.3.0"
     val browsermobVersion = "2.1.5"
@@ -36,18 +36,27 @@ dependencies {
     testCompile("it.skrape:core:0.3.1")
 
     testCompile("org.assertj:assertj-core:3.12.0")
-    testCompile("org.fluentlenium:fluentlenium-junit:$fluentleniumVersion")
+    testCompile("org.fluentlenium:fluentlenium-junit-jupiter:$fluentleniumVersion")
     testCompile("org.fluentlenium:fluentlenium-assertj:$fluentleniumVersion")
+    testCompile("org.junit.jupiter:junit-jupiter:5.4.0")
 
     testCompile("org.awaitility:awaitility-kotlin:3.1.6")
 
     testCompile("io.github.microutils:kotlin-logging:1.6.25")
 }
 
+configurations {
+    all {
+        exclude(module = "junit")
+        exclude(module = "htmlunit-driver")
+    }
+}
+
 tasks {
     val test by getting(Test::class) {
+        useJUnitPlatform()
         systemProperty("browser", System.getProperty("browser"))
-        maxParallelForks = 6
+        //maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
     }
 }
 

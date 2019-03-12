@@ -1,9 +1,9 @@
 package tests
-import config.AbstractUiIT
+import config.UiTest
 import org.fluentlenium.assertj.FluentLeniumAssertions.assertThat
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
-class ExampleIT : AbstractUiIT() {
+class ExampleIT : UiTest() {
 
     @Test
     fun `verify search field is available`() {

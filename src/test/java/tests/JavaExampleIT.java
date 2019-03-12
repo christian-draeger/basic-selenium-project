@@ -1,14 +1,14 @@
 package tests;
 
-import config.AbstractUiIT;
-import org.junit.Test;
+import config.UiTest;
+import org.junit.jupiter.api.Test;
 
 import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 
-public class JavaExampleIT extends AbstractUiIT {
+class JavaExampleIT extends UiTest {
 
     @Test
-    public void anExampleTestWrittenInJava() {
+    void anExampleTestWrittenInJava() {
         goTo("https://github.com");
         assertThat(el("input[name=q]")).isDisplayed();
     }

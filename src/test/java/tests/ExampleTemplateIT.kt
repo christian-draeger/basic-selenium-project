@@ -5,7 +5,7 @@ import it.skrape.matchers.toBe
 import it.skrape.matchers.toContain
 import it.skrape.skrape
 import it.skrape.title
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class ExampleTemplateIT {
 
