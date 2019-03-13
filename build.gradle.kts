@@ -56,9 +56,12 @@ configurations {
 tasks {
     withType<Test> {
         useJUnitPlatform()
-        systemProperty("junit.jupiter.execution.parallel.enabled", true)
-        systemProperty("junit.jupiter.execution.parallel.mode.default", "concurrent")
-        systemProperty("junit.jupiter.execution.parallel.config.dynamic.factor", 4)
+        systemProperties = mapOf(
+            "junit.jupiter.execution.parallel.enabled" to true,
+            "junit.jupiter.execution.parallel.mode.default" to "concurrent",
+            "junit.jupiter.execution.parallel.config.dynamic.factor" to 4
+        )
+        
         systemProperty("browser", System.getProperty("browser"))
 
         finalizedBy("allureReport")
