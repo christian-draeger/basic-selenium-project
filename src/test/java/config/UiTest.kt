@@ -1,5 +1,10 @@
 package config
 
+import config.annotations.Browser
+import config.annotations.Browsers
+import config.annotations.Browsers.*
+import config.annotations.Screen
+import config.annotations.Screenshot
 import mu.KotlinLogging
 import org.fluentlenium.adapter.junit.jupiter.FluentTest
 import org.fluentlenium.configuration.ConfigurationProperties
@@ -14,39 +19,37 @@ import java.io.FileInputStream
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-//@TestInstance(PER_CLASS)
 @ExtendWith(TestStatusLogger::class)
 open class UiTest : FluentTest() {
 
 	private val logger = KotlinLogging.logger {}
 
-	private val browser = System.getProperty("browser", "chrome-headless")
 	private val timeout = Integer.getInteger("page_load_timeout", 30).toLong()
 
 	override fun newWebDriver(): WebDriver {
 
-		val driver = when (browser) {
-			"firefox-headless" -> firefoxHeadless()
-			"firefox" -> firefox()
-			"chrome" -> chrome()
-			"safari" -> safari()
-			"opera" -> opera()
-			"edge" -> edge()
-			"ie" -> internetExplorer()
+		val driver = when (browserToUse()) {
+			FIREFOX_HEADLESS -> firefoxHeadless()
+			FIREFOX -> firefox()
+			CHROME -> chrome()
+			SAFARI -> safari()
+			OPERA -> opera()
+			EDGE -> edge()
+			INTERNET_EXPLORER -> internetExplorer()
 			else -> chromeHeadless()
 		}
 
 		driver.manage().timeouts().pageLoadTimeout(timeout, TimeUnit.SECONDS)
 		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS)
 		driver.manage().timeouts().setScriptTimeout(15, TimeUnit.SECONDS)
-        driver.manage().window().size = Dimension(1400, 900)
+        driver.manage().window().maximize()
 
 		return EventFiringWebDriver(driver)
 	}
 
 	@BeforeEach
 	fun setUp() {
-		screenshotMode = ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL
+		screenshotMode = if(screenshotAllways()) ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL else ConfigurationProperties.TriggerMode.MANUAL
 		screenshotPath = "build/screenshots"
 		awaitAtMost = 30_000
 
@@ -66,14 +69,58 @@ open class UiTest : FluentTest() {
 		driver.manage().deleteAllCookies()
 	}
 
+	private fun browserToUse(): Browsers {
+		javaClass.getAnnotation(Browser::class.java)?.let {
+			return it.use
+		}
+		return DEFAULT
+	}
+
+	private fun screenshotAllways()=javaClass.getAnnotation(Screenshot::class.java) != null
+
+
+	@BeforeEach
+	fun changeBrowserDimension() {
+		logger.info { "prop: ${getProp<Int>("screen.small")}" }
+		javaClass.getAnnotation(Browser::class.java)?.let {
+			if (it.dimension != Screen.DEFAULT) {
+				driver.manageWindowSize(it.dimension)
+			}
+		}
+		javaClass.declaredMethods.forEach { method ->
+			method.getAnnotation(Browser::class.java)?.let {
+				if (it.dimension != Screen.DEFAULT) {
+					driver.manageWindowSize(it.dimension)
+				}
+			}
+		}
+	}
+
+	private fun WebDriver.manageWindowSize(dimension: Screen) {
+		when (dimension) {
+			Screen.SMALL -> manage().window().size = Dimension(359, 800)
+			Screen.MEDIUM -> manage().window().size = Dimension(599, 800)
+			Screen.LARGE -> manage().window().size = Dimension(959, 800)
+			Screen.XLARGE -> manage().window().size = Dimension(1199, 800)
+			Screen.XXLARGE -> manage().window().size = Dimension(1280, 800)
+			Screen.FULLSCREEN -> manage().window().fullscreen()
+			else -> manage().window().maximize()
+		}
+
+	}
+
 	@AfterEach
 	fun tearDown() {
 		// no op
 	}
 
 	fun jq(selector: String, vararg filter: SearchFilter) = `$`(selector, *filter)
+}
 
-	private fun getProp(key: String): String? = Properties().apply {
-		load(FileInputStream("config.properties"))
-	}.getProperty(key)?: throw RuntimeException("property '$key' not found")
+@Suppress("UNCHECKED_CAST")
+fun <T> getProp(key: String): T {
+	val props = Properties().apply {
+		load(FileInputStream("src/test/resources/config.properties"))
+	}
+	return (props.getProperty(key) as T)?: throw RuntimeException("property '$key' not found")
 }

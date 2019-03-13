@@ -34,7 +34,7 @@ dependencies {
     testCompile("org.seleniumhq.selenium:selenium-java:$seleniumVersion")
     testCompile("io.github.bonigarcia:webdrivermanager:$webdriverManagerVersion")
     testCompile("net.lightbody.bmp:browsermob-core:$browsermobVersion")
-    testCompile("it.skrape:core:0.3.1")
+    compile("it.skrape:core:0.3.1")
 
     testCompile("org.assertj:assertj-core:3.12.0")
     testCompile("org.fluentlenium:fluentlenium-junit-jupiter:$fluentleniumVersion")
@@ -56,11 +56,7 @@ configurations {
 tasks {
     withType<Test> {
         useJUnitPlatform()
-        systemProperties = mapOf(
-            "junit.jupiter.execution.parallel.enabled" to true,
-            "junit.jupiter.execution.parallel.mode.default" to "concurrent",
-            "junit.jupiter.execution.parallel.config.dynamic.factor" to 4
-        )
+        parallelTestExecution()
         
         systemProperty("browser", System.getProperty("browser"))
 
@@ -70,6 +66,15 @@ tasks {
     withType<KotlinCompile> {
         kotlinOptions.jvmTarget = "1.8"
     }
+}
+
+fun Test.parallelTestExecution() {
+    val parallel = "junit.jupiter.execution.parallel"
+    systemProperties = mapOf(
+        "$parallel.enabled" to true,
+        "$parallel.mode.default" to "concurrent",
+        "$parallel.config.dynamic.factor" to 4
+    )
 }
 
 allure {

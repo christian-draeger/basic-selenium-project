@@ -5,10 +5,10 @@
 Basic Selenium Project
 ===================================
 
-This project is written in **[Kotlin](https://kotlinlang.org)** and will serve an example of implementing a 
+This scaffold project is written in **[Kotlin](https://kotlinlang.org)** and will serve an example of implementing a 
 Selenium test project with [FluentLenium](https://fluentlenium.com) (Selenium3) and [Gradle](https://gradle.org) (with kotlin DSL).
 Everything is set up and tests can be added straight away.
-Used Testrunner is JUnit.
+Used Testrunner is [JUnit 5](https://junit.org/junit5).
 _Since Kotlin has an excellent **Java** interop it's perfectly fine to write your Tests in Java if you want, it will work out of the box._
 To execute the tests just browse to the path where the selenium-kotlin-example is located via terminal and type `./gradlew clean test` or execute the tests in your IDE.
 The Project will use Chrome Browser in Headless mode by default / if no other browser is stated 
