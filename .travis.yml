@@ -2,4 +2,4 @@ language: java
 jdk:
   - openjdk11
 script:
-  ./gradlew test
+  ./gradlew test && ./gradlew test -Dbrowser=firefox-headless
