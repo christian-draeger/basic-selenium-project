@@ -5,7 +5,6 @@ import org.fluentlenium.adapter.junit.jupiter.FluentTest
 import org.fluentlenium.configuration.ConfigurationProperties
 import org.fluentlenium.core.search.SearchFilter
 import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.extension.ExtendWith
 import org.openqa.selenium.Dimension
@@ -43,12 +42,6 @@ open class UiTest : FluentTest() {
         driver.manage().window().size = Dimension(1400, 900)
 
 		return EventFiringWebDriver(driver)
-	}
-
-	companion object {
-		@BeforeAll @JvmStatic fun setup() {
-			println("starting test run with ${System.getProperty("browser", "chrome-headless")}")
-		}
 	}
 
 	@BeforeEach

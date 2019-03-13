@@ -1,3 +1,4 @@
+
 import com.adarshr.gradle.testlogger.TestLoggerExtension
 import com.adarshr.gradle.testlogger.TestLoggerPlugin
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -53,13 +54,26 @@ configurations {
 }
 
 tasks {
-    val test by getting(Test::class) {
+    withType<Test> {
         useJUnitPlatform()
+        systemProperty("junit.jupiter.execution.parallel.enabled", true)
+        systemProperty("junit.jupiter.execution.parallel.mode.default", "concurrent")
+        systemProperty("junit.jupiter.execution.parallel.config.dynamic.factor", 4)
         systemProperty("browser", System.getProperty("browser"))
-        //maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+
+        finalizedBy("allureReport")
+    }
+
+    withType<KotlinCompile> {
+        kotlinOptions.jvmTarget = "1.8"
     }
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
+allure {
+    autoconfigure = true
+    version = "2.7.0"
+
+    useJUnit5 {
+        version = "2.7.0"
+    }
 }

@@ -29,7 +29,7 @@ If you are looking for a pure Java project that uses maven as build tool please 
 * [take screenshot on test failure](#-take-screenshots)
 * [highlight clicked elements](#-highlight-clicked-elements)
 * [pretty and highly readable console output](#-beautiful-console-output)
-* [parallel test execution ready](#-parallel-test-execution) 🔜
+* [parallel test execution ready](#-parallel-test-execution)
 * [centralized project config](#-centralized-project-config) 🔜
 * [retries](#-retries)
 * include / exclude test from execution depending on browser 🔜
@@ -38,7 +38,7 @@ If you are looking for a pure Java project that uses maven as build tool please 
 * assertions, waits and test extensions
     * [assertions with selenium specific and type safe matchers](#-assertions)
     * [waiting functions](#-waits)
-* [meaningful test result report](#-allure-test-result-report) 🔜
+* [meaningful test result report](#-allure-test-result-report)
 * [template testing](#-template-testing)
 
 ## Benefits
@@ -75,7 +75,6 @@ Furthermore obvious markers will be set at succeeded (green marker) and failed (
 To get an even more clear overview of the test execution the project uses the gradle TestLoggerPlugin to pretty print executed tests.
 
 #### 👩‍👩‍👦‍👦 Parallel Test Execution
-##### (in progress, not implemented yet)
 The Project is preconfigured to run the tests in parallel.
 The number of test that will be executed at the same time is configurable (defaults to 4) or can be deactivated if required.
 
@@ -86,7 +85,8 @@ It gives you the possibility to edit the global project behaviour in one place w
 Furthermore all properties can be overridden via system properties.
 
 #### 🔁 Retries
-Conveniently run a single Test Multiple Times by using the implemented Test Rule.
+##### (in progress, not implemented yet)
+Conveniently run a single Test Multiple Times.
 It's possible to rerun failing tests automatically and mark them as flaky.
 
 #### ⛩️ Proxy
@@ -104,7 +104,6 @@ Testing web applications that are asynchroniously loading / rerendering parts of
 [Awaitility](https://github.com/awaitility/awaitility) is a DSL that allows you to express expectations of an asynchronous system in a concise and easy to read manner and is therefore added to this project.
 
 #### 📊 Allure Test Result Report
-##### (in progress, not implemented yet)
 [Allure](http://allure.qatools.ru) provides a good representation of test execution output and is designed to create 
 reports that are clear to everyone by creating graphs regarding test execution time, 
 overall test result overviews, test result history, etc.

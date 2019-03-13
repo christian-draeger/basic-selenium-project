@@ -1,4 +1,4 @@
-package tests
+package tests.browser
 import config.UiTest
 import org.fluentlenium.assertj.FluentLeniumAssertions.assertThat
 import org.junit.jupiter.api.Test
