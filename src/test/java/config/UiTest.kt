@@ -15,7 +15,6 @@ import org.junit.jupiter.api.extension.ExtendWith
 import org.openqa.selenium.Dimension
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.support.events.EventFiringWebDriver
-import java.io.FileInputStream
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -115,12 +114,14 @@ open class UiTest : FluentTest() {
 	}
 
 	fun jq(selector: String, vararg filter: SearchFilter) = `$`(selector, *filter)
-}
 
-@Suppress("UNCHECKED_CAST")
-fun <T> getProp(key: String): T {
-	val props = Properties().apply {
-		load(FileInputStream("src/test/resources/config.properties"))
+	@Suppress("UNCHECKED_CAST")
+	fun <T> getProp(key: String): T {
+		val path = "src/test/resources/config.properties"
+		val props  = javaClass.getResourceAsStream(path).use {
+			Properties().apply { load(it) }
+		}
+		return (props.getProperty(key) as T)?: throw RuntimeException("property '$key' not found")
+
 	}
-	return (props.getProperty(key) as T)?: throw RuntimeException("property '$key' not found")
 }
