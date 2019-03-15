@@ -21,7 +21,7 @@ enum class Browsers(val value: String) {
     OPERA("opera"),
     EDGE("edge"),
     INTERNET_EXPLORER("ie"),
-    DEFAULT(System.getProperty("browser", "chrome-headless")),
+    DEFAULT(System.getProperty("browser").orEmpty()),
 }
 
 @Target(AnnotationTarget.CLASS)

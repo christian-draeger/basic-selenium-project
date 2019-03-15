@@ -1,10 +1,10 @@
 package config
 
 import config.annotations.Browser
-import config.annotations.Browsers
-import config.annotations.Browsers.*
+import config.annotations.Browsers.DEFAULT
 import config.annotations.Screen
 import config.annotations.Screenshot
+import config.driver.DriverFactory
 import mu.KotlinLogging
 import org.fluentlenium.adapter.junit.jupiter.FluentTest
 import org.fluentlenium.configuration.ConfigurationProperties
@@ -25,30 +25,23 @@ open class UiTest : FluentTest() {
 
 	private val timeout = Integer.getInteger("page_load_timeout", 30).toLong()
 
+	private val driverFactory = DriverFactory()
+
 	override fun newWebDriver(): WebDriver {
 
-		val driver = when (browserToUse()) {
-			FIREFOX_HEADLESS -> firefoxHeadless()
-			FIREFOX -> firefox()
-			CHROME -> chrome()
-			SAFARI -> safari()
-			OPERA -> opera()
-			EDGE -> edge()
-			INTERNET_EXPLORER -> internetExplorer()
-			else -> chromeHeadless()
-		}
+		val currentDriver = driverFactory.get(requestedDriver())
 
-		driver.manage().timeouts().pageLoadTimeout(timeout, TimeUnit.SECONDS)
-		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS)
-		driver.manage().timeouts().setScriptTimeout(15, TimeUnit.SECONDS)
-        driver.manage().window().maximize()
+		currentDriver.manage().timeouts().pageLoadTimeout(timeout, TimeUnit.SECONDS)
+		currentDriver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS)
+		currentDriver.manage().timeouts().setScriptTimeout(15, TimeUnit.SECONDS)
+        currentDriver.manage().window().maximize()
 
-		return EventFiringWebDriver(driver)
+		return EventFiringWebDriver(currentDriver)
 	}
 
 	@BeforeEach
 	fun setUp() {
-		screenshotMode = if(screenshotAllways()) ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL else ConfigurationProperties.TriggerMode.MANUAL
+		screenshotMode = if(screenshotAlways()) ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL else ConfigurationProperties.TriggerMode.MANUAL
 		screenshotPath = "build/screenshots"
 		awaitAtMost = 30_000
 
@@ -68,15 +61,9 @@ open class UiTest : FluentTest() {
 		driver.manage().deleteAllCookies()
 	}
 
-	private fun browserToUse(): Browsers {
-		javaClass.getAnnotation(Browser::class.java)?.let {
-			return it.use
-		}
-		return DEFAULT
-	}
+	private fun requestedDriver()= javaClass.getAnnotation(Browser::class.java)?.use ?: DEFAULT
 
-	private fun screenshotAllways()=javaClass.getAnnotation(Screenshot::class.java) != null
-
+	private fun screenshotAlways()= javaClass.getAnnotation(Screenshot::class.java) != null
 
 	@BeforeEach
 	fun changeBrowserDimension() {
@@ -97,15 +84,18 @@ open class UiTest : FluentTest() {
 
 	private fun WebDriver.manageWindowSize(dimension: Screen) {
 		when (dimension) {
-			Screen.SMALL -> manage().window().size = Dimension(359, 800)
-			Screen.MEDIUM -> manage().window().size = Dimension(599, 800)
-			Screen.LARGE -> manage().window().size = Dimension(959, 800)
-			Screen.XLARGE -> manage().window().size = Dimension(1199, 800)
-			Screen.XXLARGE -> manage().window().size = Dimension(1280, 800)
+			Screen.SMALL -> windowResizeTo(359)
+			Screen.MEDIUM -> windowResizeTo(599)
+			Screen.LARGE -> windowResizeTo(959)
+			Screen.XLARGE -> windowResizeTo(1199)
+			Screen.XXLARGE -> windowResizeTo(1280)
 			Screen.FULLSCREEN -> manage().window().fullscreen()
 			else -> manage().window().maximize()
 		}
+	}
 
+	fun WebDriver.windowResizeTo(width: Int, height: Int = 800) {
+		manage().window().size = Dimension(width, height)
 	}
 
 	@AfterEach
@@ -122,6 +112,5 @@ open class UiTest : FluentTest() {
 			Properties().apply { load(it) }
 		}
 		return (props.getProperty(key) as T)?: throw RuntimeException("property '$key' not found")
-
 	}
 }

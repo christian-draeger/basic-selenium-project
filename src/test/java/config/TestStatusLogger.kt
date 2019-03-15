@@ -16,7 +16,7 @@ class TestStatusLogger : TestWatcher, BeforeEachCallback {
     private fun color(string: String, ansi: String) = "$ansi$string$ANSI_RESET"
 
     override fun beforeEach(context: ExtensionContext?) {
-        println(color(">>> test ${context!!.displayName} started", ANSI_BLUE))
+        println(color(">>> test ${context!!.testMethod.get().annotations} started", ANSI_BLUE))
     }
 
     override fun testSuccessful(context: ExtensionContext?) {
