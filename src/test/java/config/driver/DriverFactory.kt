@@ -20,22 +20,12 @@ import org.openqa.selenium.remote.CapabilityType
 import org.openqa.selenium.remote.DesiredCapabilities
 import org.openqa.selenium.safari.SafariDriver
 import org.openqa.selenium.safari.SafariOptions
-import java.util.concurrent.TimeUnit
 import java.util.logging.Level
 
-open class DriverFactory {
-
-    private val timeout = Integer.getInteger("page_load_timeout", 30).toLong()
+class DriverFactory {
 
     fun get(requestedDriver: Browsers): WebDriver {
         return webDriver[requestedDriver.value]?.invoke() ?: chromeHeadless()
-    }
-
-    fun WebDriver.defaultSettings(): WebDriver = apply {
-        manage().timeouts().pageLoadTimeout(timeout, TimeUnit.SECONDS)
-        manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS)
-        manage().timeouts().setScriptTimeout(15, TimeUnit.SECONDS)
-        manage().window().maximize()
     }
 
     private val webDriver: Map<String, () -> WebDriver> = mapOf(

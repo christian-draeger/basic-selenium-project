@@ -41,7 +41,7 @@ open class UiTest : FluentTest() {
 
 	@BeforeEach
 	fun setUp() {
-		screenshotMode = if(screenshotAlways()) ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL else ConfigurationProperties.TriggerMode.MANUAL
+		screenshotMode = screenshotMode()
 		screenshotPath = "build/screenshots"
 		awaitAtMost = 30_000
 
@@ -63,7 +63,12 @@ open class UiTest : FluentTest() {
 
 	private fun requestedDriver()= javaClass.getAnnotation(Browser::class.java)?.use ?: DEFAULT
 
-	private fun screenshotAlways()= javaClass.getAnnotation(Screenshot::class.java) != null
+	private fun screenshotMode(): ConfigurationProperties.TriggerMode {
+		if (javaClass.getAnnotation(Screenshot::class.java) != null) {
+			return ConfigurationProperties.TriggerMode.MANUAL
+		}
+		return ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL
+	}
 
 	@BeforeEach
 	fun changeBrowserDimension() {
@@ -71,13 +76,6 @@ open class UiTest : FluentTest() {
 		javaClass.getAnnotation(Browser::class.java)?.let {
 			if (it.dimension != Screen.DEFAULT) {
 				driver.manageWindowSize(it.dimension)
-			}
-		}
-		javaClass.declaredMethods.forEach { method ->
-			method.getAnnotation(Browser::class.java)?.let {
-				if (it.dimension != Screen.DEFAULT) {
-					driver.manageWindowSize(it.dimension)
-				}
 			}
 		}
 	}
