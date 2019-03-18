@@ -99,7 +99,10 @@ class DriverFactory {
     private fun safariOptions() = SafariOptions().merge(capabilities())
     private fun edgeOptions() = EdgeOptions().merge(capabilities())
     private fun ieOptions() = InternetExplorerOptions().merge(capabilities())
-    private fun chromeOptions() = ChromeOptions().addArguments("--dns-prefetch-disable").merge(capabilities())
+    private fun chromeOptions() = ChromeOptions()
+        .addArguments("--disable-gpu")
+        .addArguments("--dns-prefetch-disable")
+        .merge(capabilities())
 
     private fun capabilities(): DesiredCapabilities {
         val capabilities = DesiredCapabilities()

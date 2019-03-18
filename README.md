@@ -20,7 +20,7 @@ If you are looking for a pure Java project that uses maven as build tool please 
 >#### ℹ️ FluentLenium is a website automation framework which extends Selenium to write reliable and resilient UI functional tests. This framework is React ready. Written and maintained by people who are automating browser-based tests on a daily basis.
 
 ### Prerequisites
-* \>=**JDK11** installed
+* \>=**JDK8** installed
 
 #### Features:
 * [couple of browsers preconfigured](#-implemented-browsers)
@@ -54,19 +54,33 @@ Thanks to the awesome [webdrivermanager](https://github.com/bonigarcia/webdriver
 * Edge `./gradlew clean test -Dbrowser=edge` (will work on windows machines only)
 * Safari `./gradlew clean test -Dbrowser=safari` (will work on OSX machines only)
 
+---
+
 #### 🔥 Custom Annotations
-##### (in progress, not implemented yet)
 The project includes custom annotations to comfortably set some test conditions and/or assumptions
 like skip/require certain tests on execution with specific browsers and/or override driver options like browser dimension, headers, cookies, etc.
 This will increase the possibility to write easily readable and flexible tests.
+
+##### The @Browser Annotation
+Overwrite used (default) browser by annotating test classes or test methods with:
+
+    @Browser(use = Browsers.FIREFOX)
+    
+see list of possible [parameter values](https://github.com/christian-draeger/basic-selenium-project/blob/8d6d025ec895d831e76b9013c1648307edf0756f/src/test/java/config/driver/DriverFactory.kt#L115)
+
+---
 
 #### 📸 Take Screenshots
 On test failures screenshots will automatically be taken and stored under `build/screenshots`.
 The screenshot files will be named with a combination of the class name and the test method name.
 
+---
+
 #### 📍 Highlight Clicked Elements
 When clicking an element it will be highlighted with a red border. This is helpful to easily understand what 
 a certain test is doing while watching a test run.
+
+---
 
 #### 📟 Beautiful Console Output
 The console output is more intuitive and better readable as the default one of Gradle, jUnit and Selenium.
@@ -74,9 +88,13 @@ A colored console output will give you a clear overview about which tests are cu
 Furthermore obvious markers will be set at succeeded (green marker) and failed (red marker) tests.  
 To get an even more clear overview of the test execution the project uses the gradle TestLoggerPlugin to pretty print executed tests.
 
+---
+
 #### 👩‍👩‍👦‍👦 Parallel Test Execution
 The Project is preconfigured to run the tests in parallel.
 The number of test that will be executed at the same time is configurable (defaults to 4) or can be deactivated if required.
+
+---
 
 #### 🎯 Centralized Project Config
 ##### (in progress, not implemented yet)
@@ -84,10 +102,14 @@ All global configurations are living in a properties file (`resources/config.pro
 It gives you the possibility to edit the global project behaviour in one place without messing around with project/setup specific code.
 Furthermore all properties can be overridden via system properties.
 
+---
+
 #### 🔁 Retries
 ##### (in progress, not implemented yet)
 Conveniently run a single Test Multiple Times.
 It's possible to rerun failing tests automatically and mark them as flaky.
+
+---
 
 #### ⛩️ Proxy
 ##### (in progress, not implemented yet)
@@ -95,18 +117,26 @@ The [BrowserMob Proxy](https://github.com/lightbody/browsermob-proxy) is already
 This is especially helpful to mock dynamic data on the page under test, modify parts of the request that are not possible with some browsers (like setting custom headers in Internet Explorer) as well as speeding up 
 your tests by mocking thinks that are out of scope of a certain test (for instance tracking scripts).
 
+---
+
 #### 🚨 Assertions
 Fluentlenium extends AssertJ with FluentWebElement, FluentList and FluentPage custom assertions.
 Therefore you'll be able to write more intuitive and selenium specific assertions to give you the possibility to easily assert things like if an element is displayed etc.
+
+---
 
 #### ⏱️ Waits
 Testing web applications that are asynchroniously loading / rerendering parts of the page can become hard to test with Selenium. 
 [Awaitility](https://github.com/awaitility/awaitility) is a DSL that allows you to express expectations of an asynchronous system in a concise and easy to read manner and is therefore added to this project.
 
+---
+
 #### 📊 Allure Test Result Report
 [Allure](http://allure.qatools.ru) provides a good representation of test execution output and is designed to create 
 reports that are clear to everyone by creating graphs regarding test execution time, 
 overall test result overviews, test result history, etc.
+
+---
 
 #### 🚀 Template Testing
 From time to time we are writing tests that doesn't need browser interactions like clicking or 

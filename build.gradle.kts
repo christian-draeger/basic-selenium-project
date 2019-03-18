@@ -24,7 +24,10 @@ configure<TestLoggerExtension> {
 }
 
 dependencies {
-    val fluentleniumVersion = "4.1.1"
+    // use backported fluentlenium version (3.8.1) to support jdk 8
+    // it contains all features from the 4.x.x version
+    // see: https://github.com/FluentLenium/FluentLenium/releases/tag/v3.8.1
+    val fluentleniumVersion = "3.8.1"
     val seleniumVersion = "3.141.59"
     val webdriverManagerVersion = "3.3.0"
     val browsermobVersion = "2.1.5"

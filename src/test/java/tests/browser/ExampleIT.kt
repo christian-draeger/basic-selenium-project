@@ -8,7 +8,7 @@ import io.qameta.allure.Description
 import org.fluentlenium.assertj.FluentLeniumAssertions.assertThat
 import org.junit.jupiter.api.Test
 
-@Browser(dimension = Breakpoint.XLARGE, use = Browsers.CHROME)
+@Browser(dimension = Breakpoint.XLARGE, use = Browsers.CHROME_HEADLESS)
 @Screenshot
 class ExampleIT : UiTest() {
 
