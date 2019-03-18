@@ -3,4 +3,4 @@ jdk:
   - openjdk8
   - openjdk11
 script:
-  ./gradlew test -Dbrowser=firefox-headless
+  ./gradlew clean test -Dbrowser=firefox-headless
