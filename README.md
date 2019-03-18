@@ -23,17 +23,15 @@ If you are looking for a pure Java project that uses maven as build tool please 
 * \>=**JDK8** installed
 
 #### Features:
-* [couple of browsers preconfigured](#-implemented-browsers)
+* [all popular browsers preconfigured](#-implemented-browsers)
     * downloading OS specific binaries automatically
-* [custom annotations](#-custom-annotations) 🔜
+* [full control by annotations](#-full-control-over-certain-test-methods)
 * [take screenshot on test failure](#-take-screenshots)
 * [highlight clicked elements](#-highlight-clicked-elements)
 * [pretty and highly readable console output](#-beautiful-console-output)
 * [parallel test execution ready](#-parallel-test-execution)
-* [centralized project config](#-centralized-project-config) 🔜
+* [centralized project config](#-centralized-project-config)
 * [retries](#-retries)
-* include / exclude test from execution depending on browser 🔜
-    * idiomatic usage via provided annotations
 * [proxy to intercept / modify / mock http-requests](#-proxy) 🔜
 * assertions, waits and test extensions
     * [assertions with selenium specific and type safe matchers](#-assertions)
@@ -56,7 +54,7 @@ Thanks to the awesome [webdrivermanager](https://github.com/bonigarcia/webdriver
 
 ---
 
-#### 🔥 Custom Annotations
+#### 🕹️ Full control over certain test methods by annotations
 The project includes custom annotations to comfortably set some test conditions and/or assumptions
 like skip/require certain tests on execution with specific browsers and/or override driver options like browser dimension, headers, cookies, etc.
 This will increase the possibility to write easily readable and flexible tests.
@@ -64,9 +62,52 @@ This will increase the possibility to write easily readable and flexible tests.
 ##### The @Browser Annotation
 Overwrite used (default) browser by annotating test classes or test methods with:
 
-    @Browser(use = Browsers.FIREFOX)
+    @Browser(use = FIREFOX)
     
-see list of possible [parameter values](https://github.com/christian-draeger/basic-selenium-project/blob/8d6d025ec895d831e76b9013c1648307edf0756f/src/test/java/config/driver/DriverFactory.kt#L115)
+This will always execute the annotated tests with the selected browser, no matter what has been set as default browser. 
+See the full list of possible [parameter values](https://github.com/christian-draeger/basic-selenium-project/blob/8d6d025ec895d831e76b9013c1648307edf0756f/src/test/java/config/driver/DriverFactory.kt#L115).
+
+Furthermore you can conveniently set the Browser windows dimension that is used for the test by setting the dimension field:
+
+    @Browser(dimension = XLARGE)
+    
+This will lead to a window resize before the actual test starts and is especially helpful if the 
+site under test relies on a responsive web design. 
+See the full list of [possible dimensions](https://github.com/christian-draeger/basic-selenium-project/blob/8d6d025ec895d831e76b9013c1648307edf0756f/src/test/java/config/driver/WindowManager.kt#L8).
+The specific values of the breakpoints can be configured in the [config.properties](https://github.com/christian-draeger/basic-selenium-project/blob/8d6d025ec895d831e76b9013c1648307edf0756f/src/test/resources/config.properties) file.
+
+##### The @EnabledOnOs Annotation
+You can control that a test will ONLY be executed on specific operating systems.
+(works on class and method level)
+
+    @EnabledOnOs(LINUX, WINDOWS)
+
+If a test is annotated with `@EnabledOnOs` and the current OS the tests gets executed on is not matching, they will be skipped.
+
+##### The @DisabledOnJre Annotation
+You can control that a test will be skipped if running on specific JRE(s).
+
+    @DisabledOnJre(JAVA_8, JAVA_9)
+    
+If a test is annotated with `@DisabledOnJre` it will be skipped if tests are running on specified JRE(s).
+
+##### The @EnabledIfSystemProperty Annotation
+Gives control over test execution relying on system properties. The following example will execute the test only
+if the current OS is a 64bit system. But it could be any either provided or self defined system property.
+
+    @EnabledIfSystemProperty(named = "os.arch", matches = ".*64.*")
+    
+If a test is annotated with `@EnabledIfSystemProperty` it will ONLY be executed if the specified system property (field `named`)
+will match the provided regex (field `matches`), otherwise the test will be skipped.
+
+##### The @EnabledIfEnvironmentVariable Annotation
+Gives control over test execution relying on environment variables. The following example will execute the test only
+if the environment variable 'ENV' will be present and it's value matches 'ci'. But it could be any environment variable and regex match combination.
+
+    @EnabledIfEnvironmentVariable(named = "ENV", matches = "ci")
+    
+If a test is annotated with `@EnabledIfEnvironmentVariable` it will ONLY be executed if the specified system property (field `named`)
+will match the provided regex (field `matches`), otherwise the test will be skipped.
 
 ---
 
@@ -78,7 +119,17 @@ The screenshot files will be named with a combination of the class name and the 
 
 #### 📍 Highlight Clicked Elements
 When clicking an element it will be highlighted with a red border. This is helpful to easily understand what 
-a certain test is doing while watching a test run.
+a certain test is doing while watching a test run. This functionality is working because the project is implementing an event firing webdriver. 
+Therefore you have the possibility to hook into a bunch of driver events and do custom stuff if you want to, e.g.:
+
+* `beforeClickOn` / `afterClickOn`
+* `beforeNavigateTo` / `afterNavigateTo`
+* `beforeFindBy` / `afterFindBy`
+* `beforeScript` / `afterScript`
+* `beforeGetText` / `afterGetText`
+* `register` / `unregister`
+* `onException`
+* ... and more
 
 ---
 
@@ -97,7 +148,6 @@ The number of test that will be executed at the same time is configurable (defau
 ---
 
 #### 🎯 Centralized Project Config
-##### (in progress, not implemented yet)
 All global configurations are living in a properties file (`resources/config.properties`) and can be adjusted.
 It gives you the possibility to edit the global project behaviour in one place without messing around with project/setup specific code.
 Furthermore all properties can be overridden via system properties.
