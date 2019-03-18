@@ -4,11 +4,13 @@ import config.UiTest;
 import config.annotations.Browser;
 import config.driver.Breakpoint;
 import io.qameta.allure.Description;
+import org.fluentlenium.core.annotation.Page;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledOnJre;
 import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
 import org.junit.jupiter.api.condition.EnabledIfSystemProperty;
 import org.junit.jupiter.api.condition.EnabledOnOs;
+import tests.browser.pageobjects.StartPage;
 
 import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 import static org.junit.jupiter.api.condition.JRE.JAVA_8;
@@ -19,9 +21,18 @@ import static org.junit.jupiter.api.condition.OS.MAC;
 @Browser(dimension = Breakpoint.XLARGE)
 class JavaExampleIT extends UiTest {
 
+    @Page
+    private StartPage startPage;
+
+    @Test
+    void an_example_test_using_page_object_pattern() {
+        goTo(startPage);
+        assertThat(startPage.searchField).isDisplayed();
+    }
+
     @Test
     @Description("this is a custom description that will be visible in the detailed test report")
-    void anExampleTestWrittenInJava() {
+    void an_example_test_NOT_using_page_object_pattern() {
         goTo("https://github.com");
         assertThat(el("input[name=q]")).isDisplayed();
     }

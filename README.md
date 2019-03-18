@@ -25,7 +25,8 @@ If you are looking for a pure Java project that uses maven as build tool please 
 #### Features:
 * [all popular browsers preconfigured](#-implemented-browsers)
     * downloading OS specific binaries automatically
-* [full control by annotations](#-full-control-over-certain-test-methods)
+* [full control by annotations](#-full-control-over-certain-test-methods-by-annotations)
+* [page object pattern ready](#-page-object-pattern-ready)
 * [take screenshot on test failure](#-take-screenshots)
 * [highlight clicked elements](#-highlight-clicked-elements)
 * [pretty and highly readable console output](#-beautiful-console-output)
@@ -108,6 +109,22 @@ if the environment variable 'ENV' will be present and it's value matches 'ci'. B
     
 If a test is annotated with `@EnabledIfEnvironmentVariable` it will ONLY be executed if the specified system property (field `named`)
 will match the provided regex (field `matches`), otherwise the test will be skipped.
+
+---
+
+#### 📜 Page Object Pattern ready
+The Page-Object-Pattern can be used straight away to specify elements etc.
+To instantiate a page object in a test class just the the following:
+
+kotlin example:
+
+    @Page
+    lateinit var page: StartPage
+
+java example:
+
+    @Page
+    private StartPage startPage;
 
 ---
 

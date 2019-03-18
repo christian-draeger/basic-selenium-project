@@ -46,13 +46,18 @@ dependencies {
 
     testCompile("org.awaitility:awaitility-kotlin:3.1.6")
 
-    testCompile("io.github.microutils:kotlin-logging:1.6.25")
+    testCompile(group = "io.github.microutils", name = "kotlin-logging", version = "1.6.25")
+    testCompile(group = "org.slf4j", name = "jul-to-slf4j", version = "1.7.26")
+    
 }
 
 configurations {
     all {
         exclude(module = "junit")
         exclude(module = "htmlunit-driver")
+        exclude(module = "slf4j-log4j12")
+        exclude(module = "slf4j-simple")
+        exclude(module = "log4j")
     }
 }
 
