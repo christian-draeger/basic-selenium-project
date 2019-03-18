@@ -60,7 +60,7 @@ The project includes custom annotations to comfortably set some test conditions 
 like skip/require certain tests on execution with specific browsers and/or override driver options like browser dimension, headers, cookies, etc.
 This will increase the possibility to write easily readable and flexible tests.
 
-##### The @Browser Annotation
+##### @Browser
 Overwrite used (default) browser by annotating test classes or test methods with:
 
     @Browser(use = FIREFOX)
@@ -77,7 +77,7 @@ site under test relies on a responsive web design.
 See the full list of [possible dimensions](https://github.com/christian-draeger/basic-selenium-project/blob/8d6d025ec895d831e76b9013c1648307edf0756f/src/test/java/config/driver/WindowManager.kt#L8).
 The specific values of the breakpoints can be configured in the [config.properties](https://github.com/christian-draeger/basic-selenium-project/blob/8d6d025ec895d831e76b9013c1648307edf0756f/src/test/resources/config.properties) file.
 
-##### The @EnabledOnOs Annotation
+##### @EnabledOnOs
 You can control that a test will ONLY be executed on specific operating systems.
 (works on class and method level)
 
@@ -85,14 +85,14 @@ You can control that a test will ONLY be executed on specific operating systems.
 
 If a test is annotated with `@EnabledOnOs` and the current OS the tests gets executed on is not matching, they will be skipped.
 
-##### The @DisabledOnJre Annotation
+##### @DisabledOnJre
 You can control that a test will be skipped if running on specific JRE(s).
 
     @DisabledOnJre(JAVA_8, JAVA_9)
     
 If a test is annotated with `@DisabledOnJre` it will be skipped if tests are running on specified JRE(s).
 
-##### The @EnabledIfSystemProperty Annotation
+##### @EnabledIfSystemProperty
 Gives control over test execution relying on system properties. The following example will execute the test only
 if the current OS is a 64bit system. But it could be any either provided or self defined system property.
 
@@ -101,7 +101,7 @@ if the current OS is a 64bit system. But it could be any either provided or self
 If a test is annotated with `@EnabledIfSystemProperty` it will ONLY be executed if the specified system property (field `named`)
 will match the provided regex (field `matches`), otherwise the test will be skipped.
 
-##### The @EnabledIfEnvironmentVariable Annotation
+##### @EnabledIfEnvironmentVariable
 Gives control over test execution relying on environment variables. The following example will execute the test only
 if the environment variable 'ENV' will be present and it's value matches 'ci'. But it could be any environment variable and regex match combination.
 
@@ -116,12 +116,12 @@ will match the provided regex (field `matches`), otherwise the test will be skip
 The Page-Object-Pattern can be used straight away to specify elements etc.
 To instantiate a page object in a test class just the the following:
 
-kotlin example:
+[kotlin example](https://github.com/christian-draeger/basic-selenium-project/blob/90085a3e77d0f8af9e3990fb2512a0e52255cecc/src/test/java/tests/browser/ExampleIT.kt#L29):
 
     @Page
     lateinit var page: StartPage
 
-java example:
+[java example](https://github.com/christian-draeger/basic-selenium-project/blob/90085a3e77d0f8af9e3990fb2512a0e52255cecc/src/test/java/tests/browser/JavaExampleIT.java#L28):
 
     @Page
     private StartPage startPage;
