@@ -1,7 +1,7 @@
 package config.driver
 
-import config.annotations.Browsers
-import config.annotations.Browsers.*
+import config.Utils
+import config.driver.Browsers.*
 import io.github.bonigarcia.wdm.WebDriverManager
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeDriver
@@ -24,19 +24,19 @@ import java.util.logging.Level
 
 class DriverFactory {
 
-    fun get(requestedDriver: Browsers): WebDriver {
-        return webDriver[requestedDriver.value]?.invoke() ?: chromeHeadless()
+    fun get(requestedDriver: Browsers?): WebDriver {
+        return webDriver[requestedDriver]?.invoke() ?: default()
     }
 
-    private val webDriver: Map<String, () -> WebDriver> = mapOf(
-        FIREFOX.value to { firefox() },
-        FIREFOX_HEADLESS.value to { firefoxHeadless() },
-        CHROME.value to { chrome() },
-        CHROME_HEADLESS.value to { chromeHeadless() },
-        OPERA.value to { opera() },
-        SAFARI.value to { safari() },
-        EDGE.value to { edge() },
-        INTERNET_EXPLORER.value to { internetExplorer() }
+    private val webDriver: Map<Browsers, () -> WebDriver> = mapOf(
+        INTERNET_EXPLORER to { internetExplorer() },
+        FIREFOX_HEADLESS to { firefoxHeadless() },
+        CHROME_HEADLESS to { chromeHeadless() },
+        FIREFOX to { firefox() },
+        CHROME to { chrome() },
+        SAFARI to { safari() },
+        OPERA to { opera() },
+        EDGE to { edge() }
     )
 
     private fun firefox(): WebDriver {
@@ -67,7 +67,6 @@ class DriverFactory {
     private fun internetExplorer(): WebDriver {
         WebDriverManager.iedriver().setup()
         return InternetExplorerDriver(ieOptions())
-
     }
 
     private fun edge(): WebDriver {
@@ -77,6 +76,22 @@ class DriverFactory {
 
     private fun safari(): WebDriver {
         return SafariDriver(safariOptions())
+    }
+
+    private fun default(): WebDriver {
+        return webDriver[getDefaultBrowser()]?.invoke() ?: throw RuntimeException("Invalid Browser requested")
+    }
+
+    private fun getDefaultBrowser(): Browsers {
+        val invokedBrowser = System.getProperty("browser").orEmpty()
+
+        if (invokedBrowser.isNotBlank()) {
+            return Browsers.byString(invokedBrowser)
+        }
+
+        val defaultBrowser: String = Utils().getProp("default.browser") ?: "unsupported"
+
+        return Browsers.byString(defaultBrowser)
     }
 
     private fun firefoxOptions() = FirefoxOptions().merge(capabilities())
@@ -97,3 +112,18 @@ class DriverFactory {
     }
 }
 
+enum class Browsers(val value: String) {
+    FIREFOX("firefox"),
+    FIREFOX_HEADLESS("firefox-headless"),
+    CHROME("chrome"),
+    CHROME_HEADLESS("chrome-headless"),
+    SAFARI("safari"),
+    OPERA("opera"),
+    EDGE("edge"),
+    INTERNET_EXPLORER("ie"),
+    DEFAULT("");
+
+    companion object {
+        fun byString(s: String) = Browsers.values().find { it.value == s } ?: throw RuntimeException("invalid browser '$s' requested")
+    }
+}

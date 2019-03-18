@@ -1,13 +1,14 @@
 package tests.browser
 import config.UiTest
 import config.annotations.Browser
-import config.annotations.Screen
 import config.annotations.Screenshot
+import config.driver.Breakpoint
+import config.driver.Browsers
 import io.qameta.allure.Description
 import org.fluentlenium.assertj.FluentLeniumAssertions.assertThat
 import org.junit.jupiter.api.Test
 
-@Browser(dimension = Screen.XLARGE)
+@Browser(dimension = Breakpoint.XLARGE, use = Browsers.CHROME)
 @Screenshot
 class ExampleIT : UiTest() {
 

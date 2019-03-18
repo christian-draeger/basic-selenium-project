@@ -1,9 +1,8 @@
 package config
 
 import config.annotations.Browser
-import config.annotations.Browsers.DEFAULT
-import config.annotations.Screen
 import config.annotations.Screenshot
+import config.driver.Breakpoint
 import config.driver.DriverFactory
 import mu.KotlinLogging
 import org.fluentlenium.adapter.junit.jupiter.FluentTest
@@ -15,7 +14,6 @@ import org.junit.jupiter.api.extension.ExtendWith
 import org.openqa.selenium.Dimension
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.support.events.EventFiringWebDriver
-import java.util.*
 import java.util.concurrent.TimeUnit
 
 @ExtendWith(TestStatusLogger::class)
@@ -61,7 +59,7 @@ open class UiTest : FluentTest() {
 		driver.manage().deleteAllCookies()
 	}
 
-	private fun requestedDriver()= javaClass.getAnnotation(Browser::class.java)?.use ?: DEFAULT
+	private fun requestedDriver()= javaClass.getAnnotation(Browser::class.java)?.use
 
 	private fun screenshotMode(): ConfigurationProperties.TriggerMode {
 		if (javaClass.getAnnotation(Screenshot::class.java) != null) {
@@ -72,22 +70,21 @@ open class UiTest : FluentTest() {
 
 	@BeforeEach
 	fun changeBrowserDimension() {
-		logger.info { "prop: ${getProp<Int>("screen.small")}" }
 		javaClass.getAnnotation(Browser::class.java)?.let {
-			if (it.dimension != Screen.DEFAULT) {
+			if (it.dimension != Breakpoint.DEFAULT) {
 				driver.manageWindowSize(it.dimension)
 			}
 		}
 	}
 
-	private fun WebDriver.manageWindowSize(dimension: Screen) {
+	private fun WebDriver.manageWindowSize(dimension: Breakpoint) {
 		when (dimension) {
-			Screen.SMALL -> windowResizeTo(359)
-			Screen.MEDIUM -> windowResizeTo(599)
-			Screen.LARGE -> windowResizeTo(959)
-			Screen.XLARGE -> windowResizeTo(1199)
-			Screen.XXLARGE -> windowResizeTo(1280)
-			Screen.FULLSCREEN -> manage().window().fullscreen()
+			Breakpoint.SMALL -> windowResizeTo(359)
+			Breakpoint.MEDIUM -> windowResizeTo(599)
+			Breakpoint.LARGE -> windowResizeTo(959)
+			Breakpoint.XLARGE -> windowResizeTo(1199)
+			Breakpoint.XXLARGE -> windowResizeTo(1280)
+			Breakpoint.FULLSCREEN -> manage().window().fullscreen()
 			else -> manage().window().maximize()
 		}
 	}
@@ -102,13 +99,4 @@ open class UiTest : FluentTest() {
 	}
 
 	fun jq(selector: String, vararg filter: SearchFilter) = `$`(selector, *filter)
-
-	@Suppress("UNCHECKED_CAST")
-	fun <T> getProp(key: String): T {
-		val path = "src/test/resources/config.properties"
-		val props  = javaClass.getResourceAsStream(path).use {
-			Properties().apply { load(it) }
-		}
-		return (props.getProperty(key) as T)?: throw RuntimeException("property '$key' not found")
-	}
 }
