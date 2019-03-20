@@ -9,6 +9,7 @@ matrix:
         - source "$HOME/.sdkman/bin/sdkman-init.sh"
         - sdk install java 8.0.202-zulu
         - sudo safaridriver --enable
+        - osascript -e 'quit app "Safari"'
       script: ./gradlew clean test -Dbrowser=safari
     - os: linux
       language: java
