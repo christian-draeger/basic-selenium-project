@@ -48,7 +48,7 @@ dependencies {
 
     testCompile(group = "io.github.microutils", name = "kotlin-logging", version = "1.6.25")
     testCompile(group = "org.slf4j", name = "jul-to-slf4j", version = "1.7.26")
-    
+
 }
 
 configurations {
@@ -78,11 +78,13 @@ tasks {
 
 fun Test.parallelTestExecution() {
     val parallel = "junit.jupiter.execution.parallel"
-    systemProperties = mapOf(
-        "$parallel.enabled" to true,
-        "$parallel.mode.default" to "concurrent",
-        "$parallel.config.dynamic.factor" to 4
-    )
+    if (!project.hasProperty("serial")) {
+        systemProperties = mapOf(
+            "$parallel.enabled" to true,
+            "$parallel.mode.default" to "concurrent",
+            "$parallel.config.dynamic.factor" to 4
+        )
+    }
 }
 
 allure {
