@@ -1,7 +1,6 @@
 test_task:
   container:
     image: cirrusci/windowsservercore:2019
-    os_version: 2019
     cpu: 4
     install_script:
       - choco install ie11
