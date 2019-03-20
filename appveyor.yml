@@ -7,6 +7,9 @@ clone_depth: 5
 install:
   - choco install jdk8
   - choco install ie11
+  - choco install firefox
+  - choco install googlechrome
+  - choco install opera
   - refreshenv
 
 build_script:
