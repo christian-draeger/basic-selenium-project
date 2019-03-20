@@ -1,5 +1,5 @@
 [![Travis (.org)](https://img.shields.io/travis/christian-draeger/basic-selenium-project.svg?label=Linux)](https://travis-ci.org/christian-draeger/basic-selenium-project)
-![AppVeyor](https://img.shields.io/appveyor/ci/christian-draeger/basic-selenium-project.svg?label=Windows)
+[![AppVeyor](https://img.shields.io/appveyor/ci/christian-draeger/basic-selenium-project.svg?label=Windows)](https://ci.appveyor.com/project/christian-draeger/basic-selenium-project)
 
 ## 🚧🚸 Work in Progress
 
