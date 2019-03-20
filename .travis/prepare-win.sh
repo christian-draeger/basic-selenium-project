@@ -8,3 +8,5 @@ source "$HOME/.sdkman/bin/sdkman-init.sh"
 sdk install java 8.0.202-zulu
 
 java -version
+
+./gradlew clean test -Dbrowser=ie
