@@ -9,4 +9,4 @@ sdk install java 8.0.202-zulu
 
 java -version
 
-./gradlew clean test -Dbrowser=ie
+bash gradlew clean test -Dbrowser=ie
