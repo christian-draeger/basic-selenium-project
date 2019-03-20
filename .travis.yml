@@ -1,4 +1,8 @@
 matrix:
+  allow_failures:
+    - os:
+      - osx
+      - windows
   include:
     - os: osx
       osx_image: xcode9.4
@@ -12,4 +16,9 @@ matrix:
     - os: windows
       language: sh
       before_script: choco install jdk8
-      script: ./gradlew clean test -Dbrowser=firefox-headless
+      script: gradlew.bat clean test -Dbrowser=firefox-headless
+
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
