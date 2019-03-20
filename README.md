@@ -1,6 +1,5 @@
-[![Build Status](https://travis-ci.org/christian-draeger/basic-selenium-project.svg?branch=master)](https://travis-ci.org/christian-draeger/basic-selenium-project)
-[![Build Status](https://ci.appveyor.com/api/projects/status/32r7s2skrgm9ubva?svg=true)](https://ci.appveyor.com/api/projects/status/32r7s2skrgm9ubva?svg=true)
-
+[![Travis (.org)](https://img.shields.io/travis/christian-draeger/basic-selenium-project.svg?label=Linux)](https://travis-ci.org/christian-draeger/basic-selenium-project)
+![AppVeyor](https://img.shields.io/appveyor/ci/christian-draeger/basic-selenium-project.svg?label=Windows)
 
 ## 🚧🚸 Work in Progress
 
