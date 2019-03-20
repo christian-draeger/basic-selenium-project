@@ -1,18 +1,16 @@
-os:
-  - linux
-  - osx
-  - windows
-
-#before_install:
-#  - brew install git-lfs
-#
-#before_script:
-#  - git lfs pull
-
 language: java
-jdk:
-  - openjdk8
+
+matrix:
+  include:
+    - os: osx
+      jdk: openjdk8
+    - os: linux
+      jdk: openjdk8
+    - os: windows
+      language: generic
+      before_script: choco install jdk8
+
 script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./gradlew clean test -Dbrowser=firefox-headless ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./gradlew clean test -Dbrowser=firefox-headless ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then gradlew.bat -Dbrowser=firefox-headless ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./gradlew clean test -Dbrowser=safari ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then gradlew.bat -Dbrowser=ie ; fi
