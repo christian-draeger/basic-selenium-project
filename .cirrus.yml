@@ -1,11 +1,23 @@
-test_task:
+linux_task:
+  container:
+    image: openjdk:8-jdk
+    cpu: 8
+  test_script:
+    - ./gradlew clean test -Dbrowser=firefox-headless
+
+windows_task:
   container:
     image: cirrusci/windowsservercore:2019
-    cpu: 4
+    cpu: 8
   install_script:
     - choco install ie11
     - choco install firefox
     - choco install -y jdk8
   test_script:
     - gradlew.bat clean test -Dbrowser=firefox-headless
-    - gradlew.bat clean test -Dbrowser=ie
+
+osx_task:
+  osx_instance:
+    image: mojave-xcode-10.1
+  test_script:
+    - ./gradlew clean test -Dbrowser=firefox-headless
