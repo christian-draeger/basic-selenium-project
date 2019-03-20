@@ -5,12 +5,10 @@ matrix:
   include:
     - os: osx
       before_install:
-        - brew cask install google-chrome
-        - brew cask install firefox
         - curl -s http://get.sdkman.io | bash
         - source "$HOME/.sdkman/bin/sdkman-init.sh"
         - sdk install java 8.0.202-zulu
-        - defaults write com.apple.Safari IncludeDevelopMenu YES
+        - sudo safaridriver --enable
       script: ./gradlew clean test -Dbrowser=safari
     - os: linux
       language: java
