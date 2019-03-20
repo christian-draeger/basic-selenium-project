@@ -13,7 +13,7 @@ matrix:
     - os: windows
       language: shell
       before_install: bash .travis/prepare-win.sh
-      script: gradle clean test -Dbrowser=ie
+      script: ./gradlew clean test -Dbrowser=ie
 
 cache:
   directories:
