@@ -15,6 +15,7 @@ matrix:
       before_script:
         - choco install jdk8
         - choco install gradle
+        - refreshenv
       script: gradle clean test -Dbrowser=ie
 
 cache:
