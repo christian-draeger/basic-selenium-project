@@ -16,7 +16,9 @@ matrix:
     - os: windows
       language: sh
       before_script: choco install jdk8
-      script: gradlew.bat clean test -Dbrowser=firefox-headless
+      script:
+        - echo %cd%
+        - gradlew.bat clean test -Dbrowser=firefox-headless
 
 cache:
   directories:
