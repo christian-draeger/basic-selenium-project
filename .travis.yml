@@ -8,6 +8,7 @@ matrix:
         - curl -s http://get.sdkman.io | bash
         - source "$HOME/.sdkman/bin/sdkman-init.sh"
         - sdk install java 8.0.202-zulu
+        - defaults write com.apple.Safari IncludeDevelopMenu YES
       script: ./gradlew clean test -Dbrowser=safari
     - os: linux
       language: java
@@ -18,7 +19,7 @@ matrix:
       before_script:
         - choco install jdk8
         - choco install gradle
-        - refreshenv
+        - RefreshEnv.cmd
       script: gradle clean test -Dbrowser=ie
 
 cache:
