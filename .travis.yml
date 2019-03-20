@@ -12,7 +12,7 @@ matrix:
       script: ./gradlew clean test -Dbrowser=firefox-headless
     - os: windows
       language: shell
-      before_install: bash .travis/prepare-osx.sh
+      before_install: bash .travis/prepare-win.sh
       script: gradle clean test -Dbrowser=ie
 
 cache:
