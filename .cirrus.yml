@@ -3,7 +3,7 @@ linux_task:
     image: openjdk:8-jdk
     cpu: 8
   install_script:
-    - sudo apt-get install firefox
+    - apt-get install firefox
   test_script:
     - ./gradlew clean test -Dbrowser=firefox-headless
 
