@@ -2,10 +2,10 @@ test_task:
   container:
     image: cirrusci/windowsservercore:2019
     cpu: 4
-    install_script:
-      - choco install ie11
-      - choco install firefox
-      - choco install -y jdk8
-    test_script:
-      - gradlew.bat clean test -Dbrowser=firefox-headless
-      - gradlew.bat clean test -Dbrowser=ie
+  install_script:
+    - choco install ie11
+    - choco install firefox
+    - choco install -y jdk8
+  test_script:
+    - gradlew.bat clean test -Dbrowser=firefox-headless
+    - gradlew.bat clean test -Dbrowser=ie
