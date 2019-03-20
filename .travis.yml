@@ -12,8 +12,10 @@ matrix:
       script: ./gradlew clean test -Dbrowser=firefox-headless
     - os: windows
       language: sh
-      before_script: choco install jdk8
-      script: ./gradlew clean test -Dbrowser=ie
+      before_script:
+        - choco install jdk8
+        - choco install gradle
+      script: gradle clean test -Dbrowser=ie
 
 cache:
   directories:
