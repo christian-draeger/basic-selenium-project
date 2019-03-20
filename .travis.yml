@@ -4,22 +4,15 @@ matrix:
     - os: osx
   include:
     - os: osx
-      before_script:
-        - curl -s http://get.sdkman.io | bash
-        - source "$HOME/.sdkman/bin/sdkman-init.sh"
-        - sdk install java 8.0.202-zulu
-        - defaults write com.apple.Safari IncludeDevelopMenu YES
+      before_install: bash .travis/prepare-osx.sh
       script: ./gradlew clean test -Dbrowser=safari
     - os: linux
       language: java
       jdk: openjdk8
       script: ./gradlew clean test -Dbrowser=firefox-headless
     - os: windows
-      language: go
-      before_script:
-        - choco install jdk8
-        - choco install gradle
-        - RefreshEnv.cmd
+      language: shell
+      before_install: bash .travis/prepare-osx.sh
       script: gradle clean test -Dbrowser=ie
 
 cache:
