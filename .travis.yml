@@ -1,7 +1,7 @@
 matrix:
   allow_failures:
     - os: windows
-    - os: osx
+#    - os: osx
   include:
     - os: osx
       before_install:
@@ -15,6 +15,18 @@ matrix:
       language: java
       jdk: openjdk8
       script: ./gradlew clean test -Dbrowser=firefox-headless
+    - os: linux
+      language: java
+      jdk: openjdk8
+      addons:
+        chrome: stable
+      script: ./gradlew clean test -Dbrowser=chrome-headless
+    - os: linux
+      language: java
+      jdk: openjdk8
+      before_install:
+        - sudo snap install opera
+      script: ./gradlew clean test -Dbrowser=opera
 
 cache:
   directories:
