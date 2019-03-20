@@ -78,11 +78,13 @@ tasks {
 
 fun Test.parallelTestExecution() {
     val parallel = "junit.jupiter.execution.parallel"
-    systemProperties = mapOf(
-        "$parallel.enabled" to true,
-        "$parallel.mode.default" to "concurrent",
-        "$parallel.config.dynamic.factor" to 4
-    )
+    if (!project.hasProperty("serial")) {
+        systemProperties = mapOf(
+            "$parallel.enabled" to true,
+            "$parallel.mode.default" to "concurrent",
+            "$parallel.config.dynamic.factor" to 4
+        )
+    }
 }
 
 allure {
