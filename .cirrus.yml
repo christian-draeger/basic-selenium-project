@@ -1,0 +1,13 @@
+windows_container:
+  image: cirrusci/windowsservercore:2019
+  os_version: 2019
+  install_script:
+    - choco install ie11
+    - choco install firefox
+    - choco install -y jdk8
+
+task:
+  name:
+  script:
+    - gradlew.bat clean test -Dbrowser=firefox-headless
+    - gradlew.bat clean test -Dbrowser=ie
