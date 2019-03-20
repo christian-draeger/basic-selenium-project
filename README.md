@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/christian-draeger/basic-selenium-project.svg?branch=master)](https://travis-ci.org/christian-draeger/basic-selenium-project)
+[![Build Status](https://ci.appveyor.com/api/projects/status/32r7s2skrgm9ubva?svg=true)](https://ci.appveyor.com/api/projects/status/32r7s2skrgm9ubva?svg=true)
+
 
 ## 🚧🚸 Work in Progress
 
