@@ -13,10 +13,5 @@ install:
   - refreshenv
 
 build_script:
-  - gradlew.bat clean test -Dbrowser=firefox-headless
-  - gradlew.bat clean test -Dbrowser=chrome-headless
-  - gradlew.bat clean test -Dbrowser=firefox
-  - gradlew.bat clean test -Dbrowser=chrome
-  - gradlew.bat clean test -Dbrowser=opera
   - gradlew.bat clean test -Dbrowser=ie
 
