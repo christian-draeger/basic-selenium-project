@@ -11,7 +11,4 @@ install:
 
 build_script:
   - gradlew.bat clean test -Dbrowser=firefox-headless
-
-cache:
-  - C:\maven\
-  - C:\Users\appveyor\.m2
+  - gradlew.bat clean test -Dbrowser=ie
