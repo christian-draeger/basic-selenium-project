@@ -1,4 +1,4 @@
-version: '{branch}'
+version: '{build}'
 
 skip_tags: true
 
