@@ -21,14 +21,14 @@ matrix:
       addons:
         chrome: stable
       script: ./gradlew clean test -Dbrowser=chrome-headless
-    - os: linux
-      language: java
-      jdk: openjdk8
-      dist: xenial
-      addons:
-        snaps:
-          - opera
-      script: ./gradlew clean test -Dbrowser=opera -Pserial
+#    - os: linux
+#      language: java
+#      jdk: openjdk8
+#      dist: xenial
+#      addons:
+#        snaps:
+#          - opera
+#      script: ./gradlew clean test -Dbrowser=opera
 
 cache:
   directories:
