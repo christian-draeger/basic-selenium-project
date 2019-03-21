@@ -3,7 +3,6 @@ import config.UiTest
 import config.annotations.Browser
 import config.annotations.Screenshot
 import config.driver.Breakpoint
-import config.driver.Browsers
 import io.qameta.allure.Description
 import org.fluentlenium.assertj.FluentLeniumAssertions.assertThat
 import org.fluentlenium.core.annotation.Page
@@ -18,7 +17,7 @@ import org.junit.jupiter.api.condition.OS.LINUX
 import org.junit.jupiter.api.condition.OS.WINDOWS
 import tests.browser.pageobjects.StartPage
 
-@Browser(dimension = Breakpoint.XLARGE, use = Browsers.CHROME_HEADLESS)
+@Browser(dimension = Breakpoint.XLARGE)
 @Screenshot
 class ExampleIT : UiTest() {
 
