@@ -8,8 +8,8 @@ matrix:
         - curl -s http://get.sdkman.io | bash
         - source "$HOME/.sdkman/bin/sdkman-init.sh"
         - sdk install java 8.0.202-zulu
-        - sudo safaridriver --enable
-        - osascript -e 'quit app "Safari"'
+        - sudo safaridriver --enable # enable remote automation on safari
+       # - osascript -e 'quit app "Safari"'
       script: ./gradlew clean test -Dbrowser=safari -Pserial
     - os: linux
       language: java
@@ -21,6 +21,16 @@ matrix:
       addons:
         chrome: stable
       script: ./gradlew clean test -Dbrowser=chrome-headless
+    - os: windows
+      language: shell
+      before_install:
+        - choco install zip
+        - choco install unzip
+        - choco install ie11
+        - curl -s http://get.sdkman.io | bash
+        - sdk install java 8.0.202-zulu
+        - java -version
+      install: gradlew.bat clean test -Dbrowser=ie
 #    - os: linux
 #      language: java
 #      jdk: openjdk8
