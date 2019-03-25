@@ -5,24 +5,27 @@ matrix:
 #    - os: linux
   include:
     - os: osx
+      env: BADGE=safari
       before_install:
         - curl -s http://get.sdkman.io | bash
         - source "$HOME/.sdkman/bin/sdkman-init.sh"
         - sdk install java 8.0.202-zulu
         - sudo safaridriver --enable # enable remote automation on safari
-       # - osascript -e 'quit app "Safari"'
-      script: ./gradlew clean test -Dbrowser=safari -Pserial
+      script: ./gradlew clean test -Dbrowser=safari -Pserial # safari driver does not support parallel execution
     - os: linux
+      env: BADGE=firefox
       language: java
       jdk: openjdk8
       script: ./gradlew clean test -Dbrowser=firefox-headless
     - os: linux
+      env: BADGE=chrome
       language: java
       jdk: openjdk8
       addons:
         chrome: stable
       script: ./gradlew clean test # defaults to chrome-headless if no browser passed (see config.properties)
     - os: windows
+      env: BADGE=ie
       language: shell
       before_install:
         - choco install zip
@@ -33,6 +36,7 @@ matrix:
         - choco install ie11
       install: gradlew.bat clean test -Dbrowser=ie
 #    - os: linux
+#      env: BADGE=opera
 #      language: java
 #      jdk: openjdk8
 #      dist: xenial
