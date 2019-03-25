@@ -1,6 +1,6 @@
 [![Travis](http://badges.herokuapp.com/travis/christian-draeger/basic-selenium-project?env=BROWSER=firefox&label=Firefox&branch=master)](https://travis-ci.org/christian-draeger/basic-selenium-project)
 
-[![Travis](http://badges.herokuapp.com/travis/christian-draeger/basic-selenium-project?env=BROWSER=chrome&label=Chrome&branch=master)](https://travis-ci.org/christian-draeger/basic-selenium-project)
+[![Travis](http://badges.herokuapp.com/travis/christian-draeger/basic-selenium-project?env=BROWSER=googlechrome&label=Chrome&branch=master)](https://travis-ci.org/christian-draeger/basic-selenium-project)
 
 [![Travis](http://badges.herokuapp.com/travis/christian-draeger/basic-selenium-project?env=BROWSER=safari&label=Safari&branch=master)](https://travis-ci.org/christian-draeger/basic-selenium-project)
 
