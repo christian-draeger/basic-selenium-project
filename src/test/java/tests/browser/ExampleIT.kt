@@ -1,5 +1,5 @@
 package tests.browser
-import config.UiTest
+import config.BrowserTest
 import config.annotations.Browser
 import config.annotations.EnabledIfReachable
 import config.annotations.Screenshot
@@ -20,7 +20,7 @@ import tests.browser.pageobjects.StartPage
 
 @Browser(dimension = Breakpoint.XLARGE)
 @Screenshot
-class ExampleIT : UiTest() {
+class ExampleIT : BrowserTest() {
 
     @Page
     lateinit var page: StartPage

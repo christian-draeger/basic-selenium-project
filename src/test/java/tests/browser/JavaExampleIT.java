@@ -1,6 +1,6 @@
 package tests.browser;
 
-import config.UiTest;
+import config.BrowserTest;
 import config.annotations.Browser;
 import config.driver.Breakpoint;
 import io.qameta.allure.Description;
@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.condition.OS.LINUX;
 import static org.junit.jupiter.api.condition.OS.MAC;
 
 @Browser(dimension = Breakpoint.XLARGE)
-class JavaExampleIT extends UiTest {
+class JavaExampleIT extends BrowserTest {
 
     @Page
     private StartPage startPage;

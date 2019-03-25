@@ -17,7 +17,7 @@ import org.openqa.selenium.support.events.EventFiringWebDriver
 import java.util.concurrent.TimeUnit
 
 @ExtendWith(TestStatusLogger::class)
-open class UiTest : FluentTest() {
+open class BrowserTest : FluentTest() {
 
 	private val logger = KotlinLogging.logger {}
 
