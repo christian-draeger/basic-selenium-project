@@ -22,9 +22,7 @@ annotation class EnabledIfReachable(val url: String, val timeoutMillis: Int = 10
 
 internal class EnabledIfReachableCondition : ExecutionCondition {
 
-    override fun evaluateExecutionCondition(
-        context: ExtensionContext
-    ): ConditionEvaluationResult {
+    override fun evaluateExecutionCondition(context: ExtensionContext): ConditionEvaluationResult {
         val element = context
             .element
             .orElseThrow<IllegalStateException> { IllegalStateException() }
@@ -59,9 +57,7 @@ internal class EnabledIfReachableCondition : ExecutionCondition {
     }
 
     companion object {
-        private val ENABLED_BY_DEFAULT = ConditionEvaluationResult.enabled(
-            "@EnabledIfReachable is not present"
-        )
+        private val ENABLED_BY_DEFAULT = ConditionEvaluationResult.enabled("@EnabledIfReachable is not present")
     }
 
 }
