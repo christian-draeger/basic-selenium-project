@@ -95,7 +95,10 @@ open class UiTest : FluentTest() {
 
 	@AfterEach
 	fun tearDown() {
-		// no op
+		if (driver != null) {
+			driver.close()
+			driver.quit()
+		}
 	}
 
 	fun jq(selector: String, vararg filter: SearchFilter) = `$`(selector, *filter)

@@ -44,7 +44,7 @@ matrix:
       addons:
         snaps:
           - opera
-      script: ./gradlew clean test -Dbrowser=opera
+      script: ./gradlew clean test -Dbrowser=opera -Pserial
 
 cache:
   directories:
