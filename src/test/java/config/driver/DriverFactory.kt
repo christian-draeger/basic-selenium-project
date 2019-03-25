@@ -95,14 +95,7 @@ class DriverFactory {
     }
 
     private fun firefoxOptions() = FirefoxOptions().merge(capabilities())
-    private fun operaOptions() = OperaOptions()
-        .addArguments("--no-sandbox")
-        .setExperimentalOption("useAutomationExtension", false)
-        .addArguments("--disable-gpu")
-        .addArguments("disable-infobars")
-        .addArguments("--disable-dev-shm-usage")
-        .addArguments("--dns-prefetch-disable")
-        .merge(capabilities())
+    private fun operaOptions() = OperaOptions().merge(capabilities())
     private fun safariOptions() = SafariOptions().merge(capabilities())
     private fun edgeOptions() = EdgeOptions().merge(capabilities())
     private fun ieOptions() = InternetExplorerOptions().merge(capabilities())
