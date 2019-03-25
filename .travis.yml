@@ -2,7 +2,8 @@ matrix:
   allow_failures:
     - os: windows
 #    - os: osx
-#    - os: linux
+    - os: linux
+      env: BADGE=opera
   include:
     - os: osx
       env: BADGE=safari
@@ -35,15 +36,15 @@ matrix:
         - java -version
         - choco install ie11
       install: gradlew.bat clean test -Dbrowser=ie
-#    - os: linux
-#      env: BADGE=opera
-#      language: java
-#      jdk: openjdk8
-#      dist: xenial
-#      addons:
-#        snaps:
-#          - opera
-#      script: ./gradlew clean test -Dbrowser=opera
+    - os: linux
+      env: BADGE=opera
+      language: java
+      jdk: openjdk8
+      dist: xenial
+      addons:
+        snaps:
+          - opera
+      script: ./gradlew clean test -Dbrowser=opera
 
 cache:
   directories:

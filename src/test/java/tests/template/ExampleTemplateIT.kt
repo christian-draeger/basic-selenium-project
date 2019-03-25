@@ -13,6 +13,7 @@ class ExampleTemplateIT {
     fun `template check if title and search are present`() {
         skrape {
             url = "https://github.com"
+            timeout = 10000
             expect {
                 title {
                     toContain("GitHub")
