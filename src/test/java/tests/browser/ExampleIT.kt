@@ -1,6 +1,7 @@
 package tests.browser
 import config.UiTest
 import config.annotations.Browser
+import config.annotations.EnabledIfReachable
 import config.annotations.Screenshot
 import config.driver.Breakpoint
 import io.qameta.allure.Description
@@ -61,5 +62,9 @@ class ExampleIT : UiTest() {
         // do something here
     }
 
-
+    @Test
+    @EnabledIfReachable(url = "http://www.google.com", timeoutMillis = 5000)
+    fun `will only run if url is reachable - otherwise skipped`() {
+        // do something here
+    }
 }
