@@ -2,6 +2,7 @@ matrix:
   allow_failures:
     - os: windows
 #    - os: osx
+#    - os: linux
   include:
     - os: osx
       before_install:
@@ -20,16 +21,16 @@ matrix:
       jdk: openjdk8
       addons:
         chrome: stable
-      script: ./gradlew clean test -Dbrowser=chrome-headless
+      script: ./gradlew clean test # defaults to chrome-headless if no browser passed (see config.properties)
     - os: windows
       language: shell
       before_install:
         - choco install zip
         - choco install unzip
-        - choco install ie11
         - curl -s http://get.sdkman.io | bash
         - sdk install java 8.0.202-zulu
         - java -version
+        - choco install ie11
       install: gradlew.bat clean test -Dbrowser=ie
 #    - os: linux
 #      language: java

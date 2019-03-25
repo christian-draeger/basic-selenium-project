@@ -16,23 +16,23 @@ class TestStatusLogger : BeforeEachCallback, TestWatcher {
     private val WHITE = "\u001B[37m"
     private fun color(string: String, ansi: String) = "$ansi$string$RESET"
 
-    override fun beforeEach(context: ExtensionContext?) {
-        println(color("▶️ - test \"${context!!.displayName}\" has been started", BLUE))
+    override fun beforeEach(context: ExtensionContext) {
+        println(color("▶️ - test \"${context.displayName}\" has been started", BLUE))
     }
 
-    override fun testSuccessful(context: ExtensionContext?) {
-        println(color("✅ - test \"${context!!.displayName}\" succeeded", GREEN))
+    override fun testSuccessful(context: ExtensionContext) {
+        println(color("✅ - test \"${context.displayName}\" succeeded", GREEN))
     }
 
-    override fun testFailed(context: ExtensionContext?, cause: Throwable?) {
-        println(color("⛔ - test \"${context!!.displayName}\" failed", RED))
+    override fun testFailed(context: ExtensionContext, cause: Throwable) {
+        println(color("⛔ - test \"${context.displayName}\" failed", RED))
     }
 
-    override fun testDisabled(context: ExtensionContext?, reason: Optional<String>?) {
-        println(color("\uD83D\uDCA4 - test \"${context!!.displayName}\" has been skipped", WHITE))
+    override fun testDisabled(context: ExtensionContext, reason: Optional<String>) {
+        println(color("\uD83D\uDCA4 - test \"${context.displayName}\" has been skipped", WHITE))
     }
 
-    override fun testAborted(context: ExtensionContext?, cause: Throwable?) {
-        println(color("\uD83D\uDD19 - test ${context!!.displayName} has been aborted", BLUE))
+    override fun testAborted(context: ExtensionContext, cause: Throwable) {
+        println(color("\uD83D\uDD19 - test ${context.displayName} has been aborted", BLUE))
     }
 }
