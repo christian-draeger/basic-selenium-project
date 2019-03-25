@@ -1,7 +1,10 @@
-[![Travis (.org)](https://img.shields.io/travis/christian-draeger/basic-selenium-project.svg?label=Linux)](https://travis-ci.org/christian-draeger/basic-selenium-project)
-[![AppVeyor](https://img.shields.io/appveyor/ci/christian-draeger/basic-selenium-project.svg?label=Windows)](https://ci.appveyor.com/project/christian-draeger/basic-selenium-project)
+[![Travis](http://badges.herokuapp.com/travis/christian-draeger/basic-selenium-project?env=BADGE=firefox&label=Firefox&branch=master)](https://travis-ci.org/christian-draeger/basic-selenium-project)
 
-## 🚧🚸 Work in Progress
+[![Travis](http://badges.herokuapp.com/travis/christian-draeger/basic-selenium-project?env=BADGE=chrome&label=Chrome&branch=master)](https://travis-ci.org/christian-draeger/basic-selenium-project)
+
+[![Travis](http://badges.herokuapp.com/travis/christian-draeger/basic-selenium-project?env=BADGE=safari&label=Safari&branch=master)](https://travis-ci.org/christian-draeger/basic-selenium-project)
+
+[![AppVeyor](https://img.shields.io/appveyor/ci/christian-draeger/basic-selenium-project.svg?label=IE11)](https://ci.appveyor.com/project/christian-draeger/basic-selenium-project)
 
 Basic Selenium Project
 ===================================
@@ -26,7 +29,7 @@ If you are looking for a pure Java project that uses maven as build tool please 
 #### Features:
 * [all popular browsers preconfigured](#-implemented-browsers)
     * downloading OS specific binaries automatically
-* [full control by annotations](#-full-control-over-certain-test-methods-by-annotations)
+* [full control by annotations](#-full-control-over-certain-test-methods-and-classes-by-annotations)
 * [page object pattern ready](#-page-object-pattern-ready)
 * [take screenshot on test failure](#-take-screenshots)
 * [highlight clicked elements](#-highlight-clicked-elements)
@@ -56,7 +59,7 @@ Thanks to the awesome [webdrivermanager](https://github.com/bonigarcia/webdriver
 
 ---
 
-#### 🕹️ Full control over certain test methods by annotations
+#### 🕹️ Full control over certain test methods and classes by annotations
 The project includes custom annotations to comfortably set some test conditions and/or assumptions
 like skip/require certain tests on execution with specific browsers and/or override driver options like browser dimension, headers, cookies, etc.
 This will increase the possibility to write easily readable and flexible tests.
