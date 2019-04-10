@@ -177,9 +177,18 @@ Furthermore all properties can be overridden via system properties.
 ---
 
 #### 🔁 Retries
-##### (in progress, not implemented yet)
 Conveniently run a single Test Multiple Times.
-It's possible to rerun failing tests automatically and mark them as flaky.
+It's possible to rerun failing tests automatically when they are flaky with the following options:
+
+* rerun a certain number of times if a test fails
+    * usage: annotate test with `@RepeatedIfExceptionsTest(repeats = 3)` instead of `@Test`
+* rerun a certain number of times if a test fails because of a certain exception
+    * usage in kotlin: annotate test with `@RepeatedIfExceptionsTest(repeats = 2, exceptions = [NoSuchElementException::class])` instead of `@Test`
+    * usage in java: annotate test with `@RepeatedIfExceptionsTest(repeats = 2, exceptions = NoSuchElementException.class)` instead of `@Test`
+* supports display name formatting for tests that have to rerun
+    * usage: `@RepeatedIfExceptionsTest(repeats = 2, name = "Rerun failed test. Attempt {currentRepetition} of {totalRepetitions}")
+* includes feature to repeat certain test a bunch of times and expect to succeed a certain number of times`
+    * usage: `@RepeatedIfExceptionsTest(repeats = 100, minSuccess = 4)`
 
 ---
 

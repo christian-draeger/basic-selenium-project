@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.condition.OS.LINUX;
 import static org.junit.jupiter.api.condition.OS.MAC;
 
 @Browser(dimension = Breakpoint.XLARGE)
-class JavaExampleIT extends BrowserTest {
+class JavaBrowserExampleIT extends BrowserTest {
 
     @Page
     private StartPage startPage;

@@ -12,4 +12,7 @@ open class StartPage : FluentPage() {
     @FindBy(css = "input[name=q]")
     lateinit var searchField: FluentWebElement
 
+    @FindBy(css = "button.i-button")
+    lateinit var loginButton: FluentWebElement
+
 }

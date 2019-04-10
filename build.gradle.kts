@@ -31,24 +31,78 @@ dependencies {
     val seleniumVersion = "3.141.59"
     val webdriverManagerVersion = "3.3.0"
     val browsermobVersion = "2.1.5"
+    val skrapeitVersion = "0.4.1"
+    val jUnitVersion = "5.4.0"
+    val assertjVersion = "3.12.0"
+    val awaitilityVersion = "3.1.6"
+    val rerunnerVersion = "1.1.0"
+    val kotlinLoggerVersion = "1.6.25"
+    val julToSlf4jVersion = "1.7.26"
 
     implementation(kotlin("stdlib-jdk8"))
 
-    testCompile("org.seleniumhq.selenium:selenium-java:$seleniumVersion")
-    testCompile("io.github.bonigarcia:webdrivermanager:$webdriverManagerVersion")
-    testCompile("net.lightbody.bmp:browsermob-core:$browsermobVersion")
-    compile("it.skrape:core:0.3.1")
+    testCompile(
+        group = "org.seleniumhq.selenium",
+        name = "selenium-java",
+        version = seleniumVersion
+    )
+    testCompile(
+        group = "io.github.bonigarcia",
+        name = "webdrivermanager",
+        version = webdriverManagerVersion
+    )
+    testCompile(
+        group = "net.lightbody.bmp",
+        name = "browsermob-core",
+        version = browsermobVersion
+    )
+    testCompile(
+        group = "it.skrape",
+        name = "core",
+        version = skrapeitVersion
+    )
 
-    testCompile("org.assertj:assertj-core:3.12.0")
-    testCompile("org.fluentlenium:fluentlenium-junit-jupiter:$fluentleniumVersion")
-    testCompile("org.fluentlenium:fluentlenium-assertj:$fluentleniumVersion")
-    testCompile("org.junit.jupiter:junit-jupiter:5.4.0")
+    testCompile(
+        group = "org.assertj",
+        name = "assertj-core",
+        version = assertjVersion
+    )
+    testCompile(
+        group = "org.fluentlenium",
+        name = "fluentlenium-junit-jupiter",
+        version = fluentleniumVersion
+    )
+    testCompile(
+        group = "org.fluentlenium",
+        name = "fluentlenium-assertj",
+        version = fluentleniumVersion
+    )
+    testCompile(
+        group = "org.junit.jupiter",
+        name = "junit-jupiter",
+        version = jUnitVersion
+    )
+    testCompile(
+        group = "io.github.artsok",
+        name = "rerunner-jupiter",
+        version = rerunnerVersion
+    )
+    testCompile(
+        group = "org.awaitility",
+        name = "awaitility-kotlin",
+        version = awaitilityVersion
+    )
+    testCompile(
+        group = "io.github.microutils",
+        name = "kotlin-logging",
+        version = kotlinLoggerVersion
+    )
+    testCompile(
+        group = "org.slf4j",
+        name = "jul-to-slf4j",
+        version = julToSlf4jVersion
+    )
 
-    testCompile("org.awaitility:awaitility-kotlin:3.1.6")
-
-    testCompile(group = "io.github.microutils", name = "kotlin-logging", version = "1.6.25")
-    testCompile(group = "org.slf4j", name = "jul-to-slf4j", version = "1.7.26")
-    
 }
 
 configurations {
