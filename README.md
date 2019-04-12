@@ -224,3 +224,10 @@ From time to time we are writing tests that doesn't need browser interactions li
 execution of Javascript. We'll use template testing using [skrape{it}](https://docs.skrape.it/docs/) 
 to achieve these types of tests because it's much much faster and more robust then Selenium. 
 Please have a look at the [example test](https://github.com/christian-draeger/selenium-kotlin-example/blob/13c75c3a86be3b09eabf7f70a6b92c5451f95c9d/src/test/kotlin/tests/ExampleTemplateIT.kt)
+
+____________________
+____________________
+
+Hit count:
+
+![HitCount](http://hits.dwyl.io/christian-draeger/basic-selenium-project.svg)
