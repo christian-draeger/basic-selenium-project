@@ -13,6 +13,7 @@ group = "io.github.christian-draeger"
 version = "1.0-SNAPSHOT"
 
 repositories {
+    mavenLocal()
     jcenter()
 }
 
@@ -31,7 +32,7 @@ dependencies {
     val seleniumVersion = "3.141.59"
     val webdriverManagerVersion = "3.3.0"
     val browsermobVersion = "2.1.5"
-    val skrapeitVersion = "0.4.1"
+    val skrapeitVersion = "0.6.0"
     val jUnitVersion = "5.4.0"
     val assertjVersion = "3.12.0"
     val awaitilityVersion = "3.1.6"
@@ -58,7 +59,7 @@ dependencies {
     )
     testCompile(
         group = "it.skrape",
-        name = "core",
+        name = "skrapeit-core",
         version = skrapeitVersion
     )
 
