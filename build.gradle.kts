@@ -1,12 +1,10 @@
-
-import com.adarshr.gradle.testlogger.TestLoggerExtension
 import com.adarshr.gradle.testlogger.TestLoggerPlugin
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.3.20"
-    id("com.adarshr.test-logger") version "1.6.0"
-    id("io.qameta.allure") version "2.7.0"
+    kotlin("jvm") version "1.3.41"
+    id("com.adarshr.test-logger") version "1.7.0"
+    id("io.qameta.allure") version "2.8.1"
 }
 
 group = "io.github.christian-draeger"
@@ -18,7 +16,8 @@ repositories {
 }
 
 apply<TestLoggerPlugin>()
-configure<TestLoggerExtension> {
+
+testlogger {
     setTheme("mocha-parallel")
     slowThreshold = 6000
     showStandardStreams = true
@@ -30,75 +29,81 @@ dependencies {
     // see: https://github.com/FluentLenium/FluentLenium/releases/tag/v3.8.1
     val fluentleniumVersion = "3.8.1"
     val seleniumVersion = "3.141.59"
-    val webdriverManagerVersion = "3.3.0"
+    val webdriverManagerVersion = "3.7.1"
     val browsermobVersion = "2.1.5"
     val skrapeitVersion = "0.6.0"
-    val jUnitVersion = "5.4.0"
-    val assertjVersion = "3.12.0"
-    val awaitilityVersion = "3.1.6"
-    val rerunnerVersion = "1.1.0"
-    val kotlinLoggerVersion = "1.6.25"
-    val julToSlf4jVersion = "1.7.26"
+    val jUnitVersion = "5.5.2"
+    val assertjVersion = "3.13.2"
+    val striktVersion = "0.22.1"
+    val awaitilityVersion = "4.0.1"
+    val rerunnerVersion = "2.1.3"
+    val kotlinLoggerVersion = "1.7.6"
+    val julToSlf4jVersion = "1.7.28"
 
     implementation(kotlin("stdlib-jdk8"))
 
-    testCompile(
+    testImplementation(
         group = "org.seleniumhq.selenium",
         name = "selenium-java",
         version = seleniumVersion
     )
-    testCompile(
+    testImplementation(
         group = "io.github.bonigarcia",
         name = "webdrivermanager",
         version = webdriverManagerVersion
     )
-    testCompile(
+    testImplementation(
         group = "net.lightbody.bmp",
-        name = "browsermob-core",
+        name = "browsermob-proxy",
         version = browsermobVersion
     )
-    testCompile(
+    testImplementation(
         group = "it.skrape",
         name = "skrapeit-core",
         version = skrapeitVersion
     )
 
-    testCompile(
+    testImplementation(
         group = "org.assertj",
         name = "assertj-core",
         version = assertjVersion
     )
-    testCompile(
+    testImplementation(
         group = "org.fluentlenium",
         name = "fluentlenium-junit-jupiter",
         version = fluentleniumVersion
     )
-    testCompile(
+    testImplementation(
         group = "org.fluentlenium",
         name = "fluentlenium-assertj",
         version = fluentleniumVersion
     )
-    testCompile(
+    testImplementation(
+        group = "io.strikt",
+        name = "strikt-core",
+        version = striktVersion
+    )
+    testImplementation(
         group = "org.junit.jupiter",
         name = "junit-jupiter",
         version = jUnitVersion
     )
-    testCompile(
+    testImplementation(
         group = "io.github.artsok",
         name = "rerunner-jupiter",
         version = rerunnerVersion
     )
-    testCompile(
+    testImplementation(
         group = "org.awaitility",
         name = "awaitility-kotlin",
         version = awaitilityVersion
     )
-    testCompile(
+    testImplementation(
         group = "io.github.microutils",
         name = "kotlin-logging",
         version = kotlinLoggerVersion
     )
-    testCompile(
+    testImplementation(
         group = "org.slf4j",
         name = "jul-to-slf4j",
         version = julToSlf4jVersion
@@ -143,10 +148,11 @@ fun Test.parallelTestExecution() {
 }
 
 allure {
+    val allureVersion = "2.13.0"
+    version = allureVersion
     autoconfigure = true
-    version = "2.7.0"
-
+    aspectjVersion = "1.9.4"
     useJUnit5 {
-        version = "2.7.0"
+        version = allureVersion
     }
 }
