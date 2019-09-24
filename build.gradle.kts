@@ -16,9 +16,9 @@ repositories {
 }
 
 apply<TestLoggerPlugin>()
-
+val isIdea = System.getProperty("idea.version") != null
 testlogger {
-    setTheme("mocha-parallel")
+    setTheme(if (isIdea) "plain" else "mocha-parallel")
     slowThreshold = 6000
     showStandardStreams = true
 }
