@@ -2,9 +2,10 @@ import com.adarshr.gradle.testlogger.TestLoggerPlugin
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.3.41"
-    id("com.adarshr.test-logger") version "1.7.0"
+    kotlin("jvm") version "1.4.21"
+    id("com.adarshr.test-logger") version "1.7.1"
     id("io.qameta.allure") version "2.8.1"
+    id("com.github.ben-manes.versions") version "0.36.0"
 }
 
 group = "io.github.christian-draeger"
@@ -26,19 +27,19 @@ testlogger {
 dependencies {
     // use backported fluentlenium version (3.8.1) to support jdk 8
     // it contains all features from the 4.x.x version
-    // see: https://github.com/FluentLenium/FluentLenium/releases/tag/v3.8.1
-    val fluentleniumVersion = "3.8.1"
+    // see: https://github.com/FluentLenium/FluentLenium/releases/tag/v3.10.1
+    val fluentleniumVersion = "3.10.1"
     val seleniumVersion = "3.141.59"
-    val webdriverManagerVersion = "3.7.1"
+    val webdriverManagerVersion = "4.2.2"
     val browsermobVersion = "2.1.5"
     val skrapeitVersion = "0.6.0"
-    val jUnitVersion = "5.5.2"
-    val assertjVersion = "3.13.2"
-    val striktVersion = "0.22.1"
-    val awaitilityVersion = "4.0.1"
-    val rerunnerVersion = "2.1.3"
-    val kotlinLoggerVersion = "1.7.6"
-    val julToSlf4jVersion = "1.7.28"
+    val jUnitVersion = "5.7.0"
+    val assertjVersion = "3.18.1"
+    val striktVersion = "0.28.1"
+    val awaitilityVersion = "4.0.3"
+    val rerunnerVersion = "2.1.6"
+    val kotlinLoggerVersion = "1.12.0"
+    val julToSlf4jVersion = "1.7.30"
 
     implementation(kotlin("stdlib-jdk8"))
 
@@ -108,7 +109,12 @@ dependencies {
         name = "jul-to-slf4j",
         version = julToSlf4jVersion
     )
-
+    // We need to stick with jsoup 1.11.3 as long as we are using skrape.it in version 0.6.*
+    testImplementation("org.jsoup:jsoup") {
+        version {
+            strictly("1.11.3")
+        }
+    }
 }
 
 configurations {
@@ -148,10 +154,10 @@ fun Test.parallelTestExecution() {
 }
 
 allure {
-    val allureVersion = "2.13.0"
+    val allureVersion = "2.13.7"
     version = allureVersion
     autoconfigure = true
-    aspectjVersion = "1.9.4"
+    aspectjVersion = "1.9.6"
     useJUnit5 {
         version = allureVersion
     }
