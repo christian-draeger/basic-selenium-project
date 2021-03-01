@@ -225,6 +225,11 @@ execution of Javascript. We'll use template testing using [skrape{it}](https://d
 to achieve these types of tests because it's much much faster and more robust then Selenium. 
 Please have a look at the [example test](https://github.com/christian-draeger/selenium-kotlin-example/blob/13c75c3a86be3b09eabf7f70a6b92c5451f95c9d/src/test/kotlin/tests/ExampleTemplateIT.kt)
 
+#### Maintenance
+#### check for dependency updates
+
+    ./gradlew dependencyUpdates
+
 ____________________
 ____________________
 

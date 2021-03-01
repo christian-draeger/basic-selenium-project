@@ -2,8 +2,8 @@ import com.adarshr.gradle.testlogger.TestLoggerPlugin
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.4.21"
-    id("com.adarshr.test-logger") version "1.7.1"
+    kotlin("jvm") version "1.4.30"
+    id("com.adarshr.test-logger") version "2.1.1"
     id("io.qameta.allure") version "2.8.1"
     id("com.github.ben-manes.versions") version "0.36.0"
 }
@@ -16,6 +16,12 @@ repositories {
     jcenter()
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(14))
+    }
+}
+
 apply<TestLoggerPlugin>()
 val isIdea = System.getProperty("idea.version") != null
 testlogger {
@@ -25,23 +31,18 @@ testlogger {
 }
 
 dependencies {
-    // use backported fluentlenium version (3.8.1) to support jdk 8
-    // it contains all features from the 4.x.x version
-    // see: https://github.com/FluentLenium/FluentLenium/releases/tag/v3.10.1
-    val fluentleniumVersion = "3.10.1"
+    val fluentleniumVersion = "4.6.1"
     val seleniumVersion = "3.141.59"
-    val webdriverManagerVersion = "4.2.2"
+    val webdriverManagerVersion = "4.3.1"
     val browsermobVersion = "2.1.5"
-    val skrapeitVersion = "0.6.0"
-    val jUnitVersion = "5.7.0"
-    val assertjVersion = "3.18.1"
-    val striktVersion = "0.28.1"
+    val skrapeitVersion = "1.0.0-alpha8"
+    val jUnitVersion = "5.5.2"
+    val assertjVersion = "3.19.0"
+    val striktVersion = "0.28.2"
     val awaitilityVersion = "4.0.3"
     val rerunnerVersion = "2.1.6"
-    val kotlinLoggerVersion = "1.12.0"
-    val julToSlf4jVersion = "1.7.30"
-
-    implementation(kotlin("stdlib-jdk8"))
+    val kotlinLoggerVersion = "2.0.4"
+    val julToSlf4jVersion = "1.7.28"
 
     testImplementation(
         group = "org.seleniumhq.selenium",
@@ -109,12 +110,6 @@ dependencies {
         name = "jul-to-slf4j",
         version = julToSlf4jVersion
     )
-    // We need to stick with jsoup 1.11.3 as long as we are using skrape.it in version 0.6.*
-    testImplementation("org.jsoup:jsoup") {
-        version {
-            strictly("1.11.3")
-        }
-    }
 }
 
 configurations {
@@ -131,14 +126,19 @@ tasks {
     withType<Test> {
         useJUnitPlatform()
         parallelTestExecution()
-        
+
         systemProperty("browser", System.getProperty("browser"))
 
         finalizedBy("allureReport")
     }
 
     withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = "1.8"
+        kotlinOptions {
+            jvmTarget = "1.8"
+            apiVersion = "1.4"
+            languageVersion = "1.4"
+            freeCompilerArgs = listOf("-Xjsr305=strict")
+        }
     }
 }
 

@@ -1,6 +1,7 @@
 package tests.browser;
 
 import config.annotations.EnabledIfReachable;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledOnJre;
 import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
@@ -38,6 +39,7 @@ class JavaConditionalExecutionExampleIT {
         // do something here
     }
 
+    @Disabled // TODO: re-enable after skrapeit has been bumped to use latest okhttp
     @Test
     @EnabledIfReachable(url = "http://www.google.com", timeoutMillis = 5000)
     void will_only_run_if_url_is_reachable__otherwise_skipped() {
