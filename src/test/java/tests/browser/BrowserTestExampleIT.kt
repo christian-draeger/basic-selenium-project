@@ -1,4 +1,5 @@
 package tests.browser
+
 import config.BrowserTest
 import config.annotations.Browser
 import config.annotations.Screenshot
@@ -19,7 +20,28 @@ class BrowserTestExampleIT : BrowserTest() {
     @Test
     fun `an example test using page object pattern`() {
         goTo(page)
-        assertThat(page.searchField).isDisplayed
+
+        assertThat(page.loginButton).isDisplayed
+        assertThat(page.loginButton.text()).isEqualTo("Sign in")
+        assertThat(jq("footer a")).hasSize(36)
+    }
+
+    @Test
+    fun `an example test using page object pattern via dsl`() {
+        goTo(page)
+
+        page {
+            loginButton {
+                assert {
+                    isDisplayed
+                }
+            }
+            "footer a" {
+                assert {
+                    hasSize(36)
+                }
+            }
+        }
     }
 
     @Test
