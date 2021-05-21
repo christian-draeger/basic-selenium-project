@@ -6,7 +6,13 @@ import config.driver.Breakpoint
 import config.driver.DriverFactory
 import mu.KotlinLogging
 import org.fluentlenium.adapter.junit.jupiter.FluentTest
+import org.fluentlenium.assertj.FluentLeniumAssertions
+import org.fluentlenium.assertj.custom.FluentListAssert
+import org.fluentlenium.assertj.custom.FluentWebElementAssert
 import org.fluentlenium.configuration.ConfigurationProperties
+import org.fluentlenium.core.FluentPage
+import org.fluentlenium.core.domain.FluentList
+import org.fluentlenium.core.domain.FluentWebElement
 import org.fluentlenium.core.search.SearchFilter
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
@@ -15,6 +21,7 @@ import org.openqa.selenium.Dimension
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.support.events.EventFiringWebDriver
 import java.util.concurrent.TimeUnit
+import kotlin.reflect.full.createInstance
 
 @ExtendWith(TestStatusLogger::class)
 open class BrowserTest : FluentTest() {
@@ -99,4 +106,24 @@ open class BrowserTest : FluentTest() {
 	}
 
 	fun jq(selector: String, vararg filter: SearchFilter) = `$`(selector, *filter)
+
+	inline operator fun <reified T : FluentPage> T.invoke(init: T.() -> Unit) = with(T::class) {
+		createInstance().init()
+	}
+
+	operator fun FluentWebElement.invoke(init: FluentWebElement.() -> Unit) {
+		init()
+	}
+
+	operator fun String.invoke(init: FluentList<FluentWebElement>.() -> Unit) {
+		jq(this).init()
+	}
+
+	fun FluentWebElement.assert(init: FluentWebElementAssert.() -> Unit) {
+		FluentLeniumAssertions.assertThat(this).init()
+	}
+
+	fun FluentList<FluentWebElement>.assert(init: FluentListAssert.() -> Unit) {
+		FluentLeniumAssertions.assertThat(this).init()
+	}
 }
