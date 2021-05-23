@@ -108,7 +108,7 @@ open class BrowserTest : FluentTest() {
 	fun jq(selector: String, vararg filter: SearchFilter) = `$`(selector, *filter)
 
 	inline operator fun <reified T : FluentPage> T.invoke(init: T.() -> Unit) = with(T::class) {
-		createInstance().init()
+		apply { init() }
 	}
 
 	operator fun FluentWebElement.invoke(init: FluentWebElement.() -> Unit) {
