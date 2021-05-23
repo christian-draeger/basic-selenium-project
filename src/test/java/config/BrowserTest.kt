@@ -107,23 +107,31 @@ open class BrowserTest : FluentTest() {
 
 	fun jq(selector: String, vararg filter: SearchFilter) = `$`(selector, *filter)
 
+	@FluentleniumDsl
 	inline operator fun <reified T : FluentPage> T.invoke(init: T.() -> Unit) = with(T::class) {
 		apply { init() }
 	}
 
+	@FluentleniumDsl
 	operator fun FluentWebElement.invoke(init: FluentWebElement.() -> Unit) {
 		init()
 	}
 
+	@FluentleniumDsl
 	operator fun String.invoke(init: FluentList<FluentWebElement>.() -> Unit) {
 		jq(this).init()
 	}
 
+	@FluentleniumDsl
 	fun FluentWebElement.assert(init: FluentWebElementAssert.() -> Unit) {
 		FluentLeniumAssertions.assertThat(this).init()
 	}
 
+	@FluentleniumDsl
 	fun FluentList<FluentWebElement>.assert(init: FluentListAssert.() -> Unit) {
 		FluentLeniumAssertions.assertThat(this).init()
 	}
 }
+
+@DslMarker
+annotation class FluentleniumDsl
