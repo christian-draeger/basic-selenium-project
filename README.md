@@ -1,4 +1,5 @@
 [![Travis](http://badges.herokuapp.com/travis/christian-draeger/basic-selenium-project?env=BROWSER=firefox&label=Firefox&branch=master)](https://travis-ci.org/christian-draeger/basic-selenium-project)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fchristian-draeger%2Fbasic-selenium-project.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fchristian-draeger%2Fbasic-selenium-project?ref=badge_shield)
 
 [![Travis](http://badges.herokuapp.com/travis/christian-draeger/basic-selenium-project?env=BROWSER=googlechrome&label=Chrome&branch=master)](https://travis-ci.org/christian-draeger/basic-selenium-project)
 
@@ -236,3 +237,6 @@ ____________________
 Hit count:
 
 ![HitCount](http://hits.dwyl.io/christian-draeger/basic-selenium-project.svg)
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fchristian-draeger%2Fbasic-selenium-project.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fchristian-draeger%2Fbasic-selenium-project?ref=badge_large)
